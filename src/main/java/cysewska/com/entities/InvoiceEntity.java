@@ -1,4 +1,3 @@
-/*
 package cysewska.com.entities;
 
 import lombok.Getter;
@@ -7,10 +6,9 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.Date;
 
-*/
 /**
  * Created by Ola on 2016-08-30.
- *//*
+ */
 
 @Getter
 @Setter
@@ -29,4 +27,3 @@ public class InvoiceEntity {
 
 
 }
-*/

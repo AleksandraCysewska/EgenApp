@@ -6,10 +6,12 @@ import javax.persistence.*;
 /**
  * Created by Ola on 2016-08-04.
  */
-@Entity(name = "USER")
+
+@Entity
+@Table(name = "USER")
 public class UsersEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+   /* @GeneratedValue(strategy = GenerationType.TABLE)*/
     @Column(name = "USER_ID")
     int id;
     @Column(name = "USERNAME")
@@ -22,6 +24,9 @@ public UsersEntity(int id, String username, String password)
     this.username=username;
     this.password=password;
 }
+
+    public UsersEntity() {
+    }
 
     public int getId() {
         return id;

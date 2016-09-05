@@ -1,34 +1,41 @@
 package cysewska.com.configuration;
 
 
-import org.h2.server.web.WebServlet;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.embedded.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
-import org.springframework.orm.jpa.JpaVendorAdapter;
-import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+
 
 
 import javax.sql.DataSource;
 
-import static org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType.H2;
+import java.util.List;
+import java.util.Properties;
 
-/**
- * Created by Ola on 2016-09-04.
- */
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+
+import org.hibernate.service.ServiceRegistry;
+import org.hibernate.service.ServiceRegistryBuilder;
+import org.springframework.orm.jpa.JpaVendorAdapter;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+
+
 @Configuration
 public class WebConfiguration {
-    @Bean
+  /*  @Bean
     ServletRegistrationBean h2servletRegistration(){
         ServletRegistrationBean registrationBean = new ServletRegistrationBean( new WebServlet());
-        registrationBean.addUrlMappings("/console/*");
+        registrationBean.addUrlMappings("/console
+");
         return registrationBean;
-    }
+    }*/
 
-    @Bean
+   /* @Bean
     public DataSource dataSource() {
 
         // no need shutdown, EmbeddedDatabaseFactoryBean will take care of this
@@ -39,7 +46,7 @@ public class WebConfiguration {
                 .addScript("db/sql/insert-data.sql")
                 .build();
         return db;
-    }
+    }*/
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource, JpaVendorAdapter jpaVendorAdapter) {
         LocalContainerEntityManagerFactoryBean lef = new LocalContainerEntityManagerFactoryBean();

@@ -1,4 +1,3 @@
-/*
 package cysewska.com.entities;
 
 import cysewska.com.enums.TypeOfNip;
@@ -7,10 +6,9 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
-*/
 /**
  * Created by Ola on 2016-08-30.
- *//*
+ */
 
 @Getter
 @Setter
@@ -41,4 +39,3 @@ public class BranchEntity {
 
 
 }
-*/
