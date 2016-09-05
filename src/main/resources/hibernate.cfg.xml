@@ -14,10 +14,16 @@
 
         <property name="hibernate.hbm2ddl.auto">update</property>
 
+
         <mapping class="cysewska.com.entities.UsersEntity"/>
-
-
-
+        <mapping class="cysewska.com.entities.BranchEntity"/>
+        <mapping class="cysewska.com.entities.ClothEntity"/>
+        <mapping class="cysewska.com.entities.DepartmentEntity"/>
+        <mapping class="cysewska.com.entities.InvoiceEntity"/>
+        <mapping class="cysewska.com.entities.ModelEntity"/>
+        <mapping class="cysewska.com.entities.OrderEntity"/>
+        <mapping class="cysewska.com.entities.Textile_Cloth_Entity"/>
+        <mapping class="cysewska.com.entities.TextileEntity"/>
 
     </session-factory>
 </hibernate-configuration>

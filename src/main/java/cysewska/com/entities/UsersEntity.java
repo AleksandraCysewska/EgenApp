@@ -18,7 +18,7 @@ public class UsersEntity {
     String username;
     @Column(name = "PASSWORD")
     String password;
-public UsersEntity(int id, String username, String password)
+    public UsersEntity(int id, String username, String password)
 {
     this.id=id;
     this.username=username;
