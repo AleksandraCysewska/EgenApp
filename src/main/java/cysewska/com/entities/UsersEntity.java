@@ -11,14 +11,14 @@ import javax.persistence.*;
 @Table(name = "USER")
 public class UsersEntity {
     @Id
-   /* @GeneratedValue(strategy = GenerationType.TABLE)*/
+    @GeneratedValue(strategy = GenerationType.TABLE)
     @Column(name = "USER_ID")
-    int id;
+    Long id;
     @Column(name = "USERNAME")
     String username;
     @Column(name = "PASSWORD")
     String password;
-public UsersEntity(int id, String username, String password)
+    public UsersEntity(Long id, String username, String password)
 {
     this.id=id;
     this.username=username;
@@ -28,11 +28,20 @@ public UsersEntity(int id, String username, String password)
     public UsersEntity() {
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    @Override
+    public String toString() {
+        return "UsersEntity{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
+
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -12,7 +12,8 @@ import java.util.Date;
 
 @Getter
 @Setter
-@Entity(name = "INVOICE")
+@Entity
+@Table(name = "INVOICE")
 public class InvoiceEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
@@ -24,6 +25,10 @@ public class InvoiceEntity {
     String language;
     @Column(name = "DATE_OF_EXHIBIT")
     Date date;
+
+    @ManyToOne
+    @JoinColumn(name="ORDER_ID")
+    OrderEntity orderEntity;
 
 
 }
