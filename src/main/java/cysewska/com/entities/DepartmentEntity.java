@@ -13,7 +13,8 @@ import java.util.Set;
  */
 
 
-@Entity(name = "DEPARTMENT")
+@Entity
+@Table(name = "DEPARTMENT")
 public class DepartmentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)

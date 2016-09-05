@@ -13,8 +13,7 @@ import java.util.Set;
  */
 
 
-@Getter
-@Setter
+
 @Entity
 @Table(name = "TEXTILE")
 public class TextileEntity {
@@ -31,7 +30,53 @@ public class TextileEntity {
     @Column(name ="TEXTILE_THICKNESS" )
     Integer textileThickness;
 
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Colors getColors() {
+        return colors;
+    }
+
+    public void setColors(Colors colors) {
+        this.colors = colors;
+    }
+
+    public Integer getTextileQuantity() {
+        return textileQuantity;
+    }
+
+    public void setTextileQuantity(Integer textileQuantity) {
+        this.textileQuantity = textileQuantity;
+    }
+
+    public Integer getTextileThickness() {
+        return textileThickness;
+    }
+
+    public void setTextileThickness(Integer textileThickness) {
+        this.textileThickness = textileThickness;
+    }
+
+    public Set<Textile_Cloth_Entity> getTextile_cloths() {
+        return textile_cloths;
+    }
+
+    public void setTextile_cloths(Set<Textile_Cloth_Entity> textile_cloths) {
+        this.textile_cloths = textile_cloths;
+    }
 
     @OneToMany(mappedBy="textileEntity", fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     Set<Textile_Cloth_Entity> textile_cloths;
