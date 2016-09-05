@@ -1,18 +1,20 @@
 package cysewska.com.entities;
 
-import cysewska.com.enums.TypeOfNip;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
+import java.util.Set;
 
 /**
- * Created by Ola on 2016-08-30.
+ * Created by cysewskaa on 2016-09-05.
  */
 
 @Getter
 @Setter
-@Entity(name = "BRANCH")
+@Entity
+@Table(name = "BRANCH")
 public class BranchEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
@@ -20,22 +22,7 @@ public class BranchEntity {
     Long id;
     @Column(name = "BRANCH_NAME")
     String name;
-    @Column(name = "TYPE_OF_NIP")
-    TypeOfNip typeOfNip;
-    @Column(name = "NIP")
-    String nip;
-    @Column(name = "COUNTRY")
-    String country;
-    @Column(name = "CITY")
-    String city;
-    @Column(name = "ADDRESS")
-    String address;
-    @Column(name = "ZIP")
-    String zip;
-    @Column(name = "EMAIL")
-    String email;
-    @Column(name = "TELEPHONE")
-    String telephone;
 
-
+    @OneToMany(mappedBy="branchEntity", fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    Set<DepartmentEntity> departments;
 }
