@@ -15,10 +15,9 @@ import java.util.Set;
  * Created by Ola on 2016-09-04.
  */
 
-@Getter
-@Setter
+
 @Entity
-@Table(name = "ORDER")
+@Table(name = "ORDERS")
 public class OrderEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
@@ -28,6 +27,25 @@ public class OrderEntity {
     String name;
     @Column(name = "NOTE")
     String note;
+
+    @Override
+    public String toString() {
+        return "OrderEntity{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", note='" + note + '\'' +
+                ", dateOfSubmit=" + dateOfSubmit +
+                ", dateOfExecution=" + dateOfExecution +
+                ", typeOfPayment=" + typeOfPayment +
+                ", termOfPayment=" + termOfPayment +
+                ", weightNetto=" + weightNetto +
+                ", weightBrutto=" + weightBrutto +
+                ", quantityOfPallet=" + quantityOfPallet +
+                ", invoices=" + invoices +
+                ", clothEntity=" + cloths +
+                '}';
+    }
+
     @Column( name = "DATE_OF_SUBMIT")
     Date dateOfSubmit;
     @Column(name = "DATE_OF_EXECUTION")
@@ -44,19 +62,50 @@ public class OrderEntity {
     Integer quantityOfPallet;
 
     @ManyToOne
-    @LazyCollection(LazyCollectionOption.FALSE)
     @JoinColumn(name="DEPARTMENT_ID")
     DepartmentEntity departmentEntity;
 
 
-    @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(mappedBy="orderEntity", fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     Set<InvoiceEntity> invoices;
 
-    @ManyToMany(cascade = {CascadeType.ALL})
-    @LazyCollection(LazyCollectionOption.FALSE)
-    @JoinTable(name="ORDER_CLOTH",
-            joinColumns={@JoinColumn(name="CLOTH_ID")},
-            inverseJoinColumns={@JoinColumn(name= "ORDER_ID")})
-    Set<ClothEntity> cloths;
+    @ManyToMany(mappedBy="orders")
+    Set<ClothEntity>  cloths;
+
+
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+
+    public DepartmentEntity getDepartmentEntity() {
+        return departmentEntity;
+    }
+
+    public void setDepartmentEntity(DepartmentEntity departmentEntity) {
+        this.departmentEntity = departmentEntity;
+    }
+
+    public Set<InvoiceEntity> getInvoices() {
+        return invoices;
+    }
+
+    public void setInvoices(Set<InvoiceEntity> invoices) {
+        this.invoices = invoices;
+    }
+
+
 }

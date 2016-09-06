@@ -13,7 +13,8 @@ import java.util.Set;
  */
 
 
-@Entity(name = "DEPARTMENT")
+@Entity
+@Table(name = "DEPARTMENT")
 public class DepartmentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
@@ -41,6 +42,23 @@ public class DepartmentEntity {
     @ManyToOne
     @JoinColumn(name="BRANCH_ID")
     BranchEntity branchEntity;
+
+    @Override
+    public String toString() {
+        return "DepartmentEntity{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", typeOfNip=" + typeOfNip +
+                ", nip='" + nip + '\'' +
+                ", country='" + country + '\'' +
+                ", city='" + city + '\'' +
+                ", address='" + address + '\'' +
+                ", zip='" + zip + '\'' +
+                ", email='" + email + '\'' +
+                ", telephone='" + telephone + '\'' +
+                ", orders=" + orders +
+                '}';
+    }
 
     @OneToMany(mappedBy="departmentEntity", fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     Set<OrderEntity> orders;
