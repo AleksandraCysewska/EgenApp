@@ -23,6 +23,15 @@ public class ModelEntity {
     @Column(name = "MODEL_NAME")
     Model model;
 
+    @Override
+    public String toString() {
+        return "ModelEntity{" +
+                "id=" + id +
+                ", model=" + model +
+
+                '}';
+    }
+
     @OneToMany(mappedBy="modelEntity", fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     Set<ClothEntity> cloths;
 

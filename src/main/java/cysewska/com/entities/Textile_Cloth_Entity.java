@@ -23,6 +23,15 @@ public class Textile_Cloth_Entity {
     @JoinColumn(name="CLOTH_ID")
     ClothEntity clothEntity;
 
+    @Override
+    public String toString() {
+        return "Textile_Cloth_Entity{" +
+                "id=" + id +
+                ", textileClothQuantities=" + textileClothQuantities +
+
+                '}';
+    }
+
     public Long getId() {
         return id;
     }

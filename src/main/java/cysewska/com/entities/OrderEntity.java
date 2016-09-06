@@ -17,7 +17,7 @@ import java.util.Set;
 
 
 @Entity
-@Table(name = "ORDER")
+@Table(name = "ORDERS")
 public class OrderEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
@@ -27,6 +27,25 @@ public class OrderEntity {
     String name;
     @Column(name = "NOTE")
     String note;
+
+    @Override
+    public String toString() {
+        return "OrderEntity{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", note='" + note + '\'' +
+                ", dateOfSubmit=" + dateOfSubmit +
+                ", dateOfExecution=" + dateOfExecution +
+                ", typeOfPayment=" + typeOfPayment +
+                ", termOfPayment=" + termOfPayment +
+                ", weightNetto=" + weightNetto +
+                ", weightBrutto=" + weightBrutto +
+                ", quantityOfPallet=" + quantityOfPallet +
+                ", invoices=" + invoices +
+                ", clothEntity=" + cloths +
+                '}';
+    }
+
     @Column( name = "DATE_OF_SUBMIT")
     Date dateOfSubmit;
     @Column(name = "DATE_OF_EXECUTION")
@@ -50,11 +69,10 @@ public class OrderEntity {
     @OneToMany(mappedBy="orderEntity", fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     Set<InvoiceEntity> invoices;
 
-    @ManyToMany(cascade = {CascadeType.ALL})
-    @JoinTable(name="ORDER_CLOTH",
-            joinColumns={@JoinColumn(name="CLOTH_ID")},
-            inverseJoinColumns={@JoinColumn(name= "ORDER_ID")})
-    Set<ClothEntity> cloths;
+    @ManyToMany(mappedBy="orders")
+    Set<ClothEntity>  cloths;
+
+
 
     public Long getId() {
         return id;
@@ -72,69 +90,6 @@ public class OrderEntity {
         this.name = name;
     }
 
-    public String getNote() {
-        return note;
-    }
-
-    public void setNote(String note) {
-        this.note = note;
-    }
-
-    public Date getDateOfSubmit() {
-        return dateOfSubmit;
-    }
-
-    public void setDateOfSubmit(Date dateOfSubmit) {
-        this.dateOfSubmit = dateOfSubmit;
-    }
-
-    public Date getDateOfExecution() {
-        return dateOfExecution;
-    }
-
-    public void setDateOfExecution(Date dateOfExecution) {
-        this.dateOfExecution = dateOfExecution;
-    }
-
-    public TypeOfPayment getTypeOfPayment() {
-        return typeOfPayment;
-    }
-
-    public void setTypeOfPayment(TypeOfPayment typeOfPayment) {
-        this.typeOfPayment = typeOfPayment;
-    }
-
-    public Date getTermOfPayment() {
-        return termOfPayment;
-    }
-
-    public void setTermOfPayment(Date termOfPayment) {
-        this.termOfPayment = termOfPayment;
-    }
-
-    public Integer getWeightNetto() {
-        return weightNetto;
-    }
-
-    public void setWeightNetto(Integer weightNetto) {
-        this.weightNetto = weightNetto;
-    }
-
-    public Integer getWeightBrutto() {
-        return weightBrutto;
-    }
-
-    public void setWeightBrutto(Integer weightBrutto) {
-        this.weightBrutto = weightBrutto;
-    }
-
-    public Integer getQuantityOfPallet() {
-        return quantityOfPallet;
-    }
-
-    public void setQuantityOfPallet(Integer quantityOfPallet) {
-        this.quantityOfPallet = quantityOfPallet;
-    }
 
     public DepartmentEntity getDepartmentEntity() {
         return departmentEntity;
@@ -152,11 +107,5 @@ public class OrderEntity {
         this.invoices = invoices;
     }
 
-    public Set<ClothEntity> getCloths() {
-        return cloths;
-    }
 
-    public void setCloths(Set<ClothEntity> cloths) {
-        this.cloths = cloths;
-    }
 }

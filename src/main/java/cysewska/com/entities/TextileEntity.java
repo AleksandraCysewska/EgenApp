@@ -38,6 +38,18 @@ public class TextileEntity {
         this.id = id;
     }
 
+    @Override
+    public String toString() {
+        return "TextileEntity{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", colors=" + colors +
+                ", textileQuantity=" + textileQuantity +
+                ", textileThickness=" + textileThickness +
+
+                '}';
+    }
+
     public String getName() {
         return name;
     }

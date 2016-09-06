@@ -22,6 +22,17 @@ public class InvoiceEntity {
     String name;
     @Column(name = "LANGUAGE_OF_INVOICE")
     String language;
+
+    @Override
+    public String toString() {
+        return "InvoiceEntity{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", language='" + language + '\'' +
+                ", date=" + date +
+                '}';
+    }
+
     @Column(name = "DATE_OF_EXHIBIT")
     Date date;
 

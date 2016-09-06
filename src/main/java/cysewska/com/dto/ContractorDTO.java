@@ -14,7 +14,7 @@ public class ContractorDTO {
     String email;
     String telephone;
 
-    public ContractorDTO(String branchName, String departmentName, String nip, String country, String city, String address, String zip, String email, String telephone) {
+    public ContractorDTO(String branchName, String departmentName, String nip,String country,  String city, String address, String zip, String email, String telephone) {
         this.branchName = branchName;
         this.departmentName = departmentName;
         this.nip = nip;
