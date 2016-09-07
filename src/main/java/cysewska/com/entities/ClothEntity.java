@@ -63,7 +63,85 @@ public class ClothEntity {
             inverseJoinColumns={@JoinColumn(name= "ORDER_ID")})
     Set<OrderEntity> orders;
 
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getClothNamePL() {
+        return clothNamePL;
+    }
+
+    public void setClothNamePL(String clothNamePL) {
+        this.clothNamePL = clothNamePL;
+    }
+
+    public String getClothNameNO() {
+        return clothNameNO;
+    }
+
+    public void setClothNameNO(String clothNameNO) {
+        this.clothNameNO = clothNameNO;
+    }
+
+    public String getClothNameENG() {
+        return clothNameENG;
+    }
+
+    public void setClothNameENG(String clothNameENG) {
+        this.clothNameENG = clothNameENG;
+    }
+
+    public Byte[] getClothImage() {
+        return clothImage;
+    }
+
+    public void setClothImage(Byte[] clothImage) {
+        this.clothImage = clothImage;
+    }
+
+    public Integer getPriceEuro() {
+        return priceEuro;
+    }
+
+    public void setPriceEuro(Integer priceEuro) {
+        this.priceEuro = priceEuro;
+    }
+
+    public Integer getPricePl() {
+        return pricePl;
+    }
+
+    public void setPricePl(Integer pricePl) {
+        this.pricePl = pricePl;
+    }
+
+    public ModelEntity getModelEntity() {
+        return modelEntity;
+    }
+
+    public void setModelEntity(ModelEntity modelEntity) {
+        this.modelEntity = modelEntity;
+    }
+
+    public Set<OrderEntity> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<OrderEntity> orders) {
+        this.orders = orders;
+    }
+
+    public Set<Textile_Cloth_Entity> getTextile_cloths() {
+        return textile_cloths;
+    }
+
+    public void setTextile_cloths(Set<Textile_Cloth_Entity> textile_cloths) {
+        this.textile_cloths = textile_cloths;
+    }
 
     @OneToMany(mappedBy="clothEntity", fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     Set<Textile_Cloth_Entity> textile_cloths;
