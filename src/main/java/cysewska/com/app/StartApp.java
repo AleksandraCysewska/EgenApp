@@ -1,5 +1,6 @@
 package cysewska.com.app;
 
+
 import de.felixroske.jfxsupport.AbstractJavaFxApplicationSupport;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;

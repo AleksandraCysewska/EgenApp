@@ -6,11 +6,49 @@
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
 
-<SplitPane fx:id="okienko" dividerPositions="0.07035175879396985" orientation="VERTICAL" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="cysewska.com.views.MainView">
+<SplitPane fx:id="okienko" dividerPositions="0.07035175879396985" maxWidth="600.0" orientation="VERTICAL" prefHeight="400.0" prefWidth="-1.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="cysewska.com.views.MainView">
   <items>
     <AnchorPane maxHeight="25.0" minHeight="25.0" minWidth="0.0" prefHeight="25.0" prefWidth="598.0">
       <children>
-        <MenuBar prefHeight="37.0" prefWidth="598.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+        <MenuBar prefHeight="37.0" prefWidth="598.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+          <menus>
+            <Menu mnemonicParsing="false" text="Plik" fx:id="m_file">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Action 1" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Kontrahenci" fx:id="m_conctractor">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#addContractor" text="Dodaj" fx:id="mi_addContractor" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Zamówienia" fx:id="m_order">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Action 1" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Towary" fx:id="m_cloth">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Action 1" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Faktury" fx:id="m_invoice">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Action 1" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Tkaniny" fx:id="m_textile">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Action 1" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Pomoc" fx:id="m_help">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Action 1" />
+              </items>
+            </Menu>
+          </menus>
+        </MenuBar>
       </children>
     </AnchorPane>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
@@ -77,7 +115,7 @@
                       <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                           <children>
-                            <TableView  fx:id="table_textile" prefHeight="265.0" prefWidth="596.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                            <TableView fx:id="table_textile" prefHeight="265.0" prefWidth="596.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                           </children>
                         </AnchorPane>
                       </content>
