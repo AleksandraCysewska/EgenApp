@@ -13,6 +13,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import org.aspectj.lang.annotation.control.CodeGenerationHint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -51,6 +52,7 @@ public class TextileViewImp {
     public void fillTableData() {
 
         List<TextileEntity> textileEntities = textilRepository.findAll();
+        System.out.println(textileEntities);
         List<TextileDTO> textileDTOs = textileEntities.stream().map(textileEntity -> new TextileDTO(textileEntity.getName(), textileEntity.getColors(),
                 textileEntity.getTextileQuantity(), textileEntity.getTextileThickness())).collect(Collectors.toList());
         mainView.getTableTextile().setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
