@@ -5,7 +5,7 @@ import de.felixroske.jfxsupport.AbstractJavaFxApplicationSupport;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.orm.jpa.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
-import cysewska.com.views.contractors.ContractorAction;
+import cysewska.com.views.MainView;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 
@@ -21,6 +21,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableJpaRepositories(basePackages = "cysewska.com.repositories")
 public class StartApp extends AbstractJavaFxApplicationSupport {
     public static void main(String[] args) {
-        launchApp(StartApp.class, ContractorAction.class, args);}
+        launchApp(StartApp.class, MainView.class, args);}
     }
 

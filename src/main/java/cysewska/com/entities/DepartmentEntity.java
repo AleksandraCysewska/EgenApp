@@ -43,22 +43,6 @@ public class DepartmentEntity {
     @JoinColumn(name="BRANCH_ID")
     BranchEntity branchEntity;
 
-    @Override
-    public String toString() {
-        return "DepartmentEntity{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", typeOfNip=" + typeOfNip +
-                ", nip='" + nip + '\'' +
-                ", country='" + country + '\'' +
-                ", city='" + city + '\'' +
-                ", address='" + address + '\'' +
-                ", zip='" + zip + '\'' +
-                ", email='" + email + '\'' +
-                ", telephone='" + telephone + '\'' +
-                ", orders=" + orders +
-                '}';
-    }
 
     @OneToMany(mappedBy="departmentEntity", fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     Set<OrderEntity> orders;
