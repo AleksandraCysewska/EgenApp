@@ -1,6 +1,6 @@
 package cysewska.com.repositories;
 
-import cysewska.com.entities.UsersEntity;
+import cysewska.com.models.entities.UsersEntity;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -1,6 +1,6 @@
 package cysewska.com.repositories;
 
-import cysewska.com.entities.InvoiceEntity;
+import cysewska.com.models.entities.InvoiceEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
