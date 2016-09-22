@@ -13,7 +13,7 @@ import java.util.Set;
 @Table(name = "ORDERS")
 public class OrderEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+   // @GeneratedValue(strategy = GenerationType.TABLE)
     @Column(name = "ORDER_ID")
     Long id;
     @Column(name = "ORDER_NAME")
@@ -21,9 +21,9 @@ public class OrderEntity {
     @Column(name = "NOTE")
     String note;
     @Column( name = "DATE_OF_SUBMIT")
-    Date dateOfSubmit;
+    String dateOfSubmit;
     @Column(name = "DATE_OF_EXECUTION")
-    Date dateOfExecution;
+    String dateOfExecution;
 
 
     @ManyToOne
@@ -34,14 +34,30 @@ public class OrderEntity {
     @OneToMany(mappedBy="orderEntity", fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     Set<InvoiceEntity> invoices;
 
-    @ManyToMany(mappedBy="orders")
-    Set<ClothEntity>  cloths;
+    @OneToMany(mappedBy="orderEntity",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    Set<OrderClothEntity>  orderClothEntities;
 
 
     public OrderEntity() {
     }
 
+    public OrderEntity(Long id, String name, String note, String dateOfSubmit, String dateOfExecution, DepartmentEntity departmentEntity) {
+        this.id = id;
+        this.name = name;
+        this.note = note;
+        this.dateOfSubmit = dateOfSubmit;
+        this.dateOfExecution = dateOfExecution;
+        this.departmentEntity = departmentEntity;
 
+    }
+
+    public Set<OrderClothEntity> getOrderClothEntities() {
+        return orderClothEntities;
+    }
+
+    public void setOrderClothEntities(Set<OrderClothEntity> orderClothEntities) {
+        this.orderClothEntities = orderClothEntities;
+    }
 
     public Long getId() {
         return id;
@@ -67,19 +83,19 @@ public class OrderEntity {
         this.note = note;
     }
 
-    public Date getDateOfSubmit() {
+    public String getDateOfSubmit() {
         return dateOfSubmit;
     }
 
-    public void setDateOfSubmit(Date dateOfSubmit) {
+    public void setDateOfSubmit(String daStringteOfSubmit) {
         this.dateOfSubmit = dateOfSubmit;
     }
 
-    public Date getDateOfExecution() {
+    public String getDateOfExecution() {
         return dateOfExecution;
     }
 
-    public void setDateOfExecution(Date dateOfExecution) {
+    public void setDateOfExecution(String dateOfExecution) {
         this.dateOfExecution = dateOfExecution;
     }
 
@@ -99,23 +115,7 @@ public class OrderEntity {
         this.invoices = invoices;
     }
 
-    public Set<ClothEntity> getCloths() {
-        return cloths;
-    }
 
-    public void setCloths(Set<ClothEntity> cloths) {
-        this.cloths = cloths;
-    }
 
-    public OrderEntity(Long id, String name, String note, Date dateOfSubmit, Date dateOfExecution, DepartmentEntity departmentEntity, Set<InvoiceEntity> invoices, Set<ClothEntity> cloths) {
 
-        this.id = id;
-        this.name = name;
-        this.note = note;
-        this.dateOfSubmit = dateOfSubmit;
-        this.dateOfExecution = dateOfExecution;
-        this.departmentEntity = departmentEntity;
-        this.invoices = invoices;
-        this.cloths = cloths;
-    }
 }

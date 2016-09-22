@@ -62,10 +62,10 @@ public class ContractorView  {
         for (BranchEntity branchEntity : branchEntities) {
 
             contractorDTOs.addAll(branchEntity.getDepartments().stream().map(department -> new ContractorDTO(
-                    branchEntity.getName().toString(), department.getName().toString(),
-                    department.getNip(), department.getCountry().toString(),
-                    department.getCity().toString(), department.getAddress().toString(),
-                    department.getZip().toString(), department.getEmail().toString(),
+                    branchEntity.getName(), department.getName(),
+                    department.getNip(), department.getCountry(),
+                    department.getCity(), department.getAddress(),
+                    department.getZip(), department.getEmail(),
                     department.getTelephone())).collect(Collectors.toList()));
         }
 

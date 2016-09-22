@@ -61,12 +61,18 @@ public class MainView implements Initializable {
 
     @Autowired
     AddContractorWindow add;
+    @Autowired
+    AddOrder addOrder;
     @FXML
     public void addContractor(ActionEvent actionEvent) throws IOException {
 
         add.cos();
     }
-
+    @FXML
+    public void addOrder(ActionEvent actionEvent)
+    {
+        addOrder.showWindow();
+    }
     @Override
     public void initialize(URL location, ResourceBundle resources)  {
 

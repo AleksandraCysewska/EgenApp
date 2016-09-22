@@ -12,7 +12,7 @@ import java.util.Set;
 @Table(name = "CLOTH")
 public class ClothEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+   // @GeneratedValue(strategy = GenerationType.TABLE)
     @Column(name = "CLOTH_ID")
     Long id;
     @Column(name = "CLOTH_NAME_PL")
@@ -28,7 +28,8 @@ public class ClothEntity {
     @Column(name = "PRICE_PL")
     Integer pricePl;
 
-
+    @OneToMany(mappedBy="clothEntity",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    Set<OrderClothEntity>  orderClothEntities;
 
     @ManyToOne
     @JoinColumn(name="MODEL_ID")
@@ -98,13 +99,7 @@ public class ClothEntity {
         this.modelEntity = modelEntity;
     }
 
-    public Set<OrderEntity> getOrders() {
-        return orders;
-    }
 
-    public void setOrders(Set<OrderEntity> orders) {
-        this.orders = orders;
-    }
 
     public Set<Textile_Cloth_Entity> getTextile_cloths() {
         return textile_cloths;
@@ -132,12 +127,6 @@ public class ClothEntity {
   /*  @ManyToMany(targetEntity=cysewska.com.models.entities.OrderEntity.class)
     Set<OrderEntity> orderEntity;
 */
-
-    @ManyToMany( fetch = FetchType.LAZY)
-    @JoinTable(name="ORDER_CLOTH",
-            joinColumns={@JoinColumn(name="CLOTH_ID")},
-            inverseJoinColumns={@JoinColumn(name= "ORDER_ID")})
-    Set<OrderEntity> orders;
 
 
 

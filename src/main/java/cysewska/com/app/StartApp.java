@@ -42,9 +42,10 @@ public class StartApp extends Application {
         this.primaryStage = primaryStage;
         MySpringFXMLLoader loader = applicationContext.getBean(MySpringFXMLLoader.class);
         this.root = loader.load("complex.fxml");
-        primaryStage.setFullScreen(true);
+     //   primaryStage.setFullScreen(true);
+        primaryStage.setMaximized(true);
         primaryStage.setScene(new Scene(root));
-        primaryStage.setResizable(false);
+        primaryStage.setResizable(true);
         primaryStage.show();
     }
 

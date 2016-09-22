@@ -24,7 +24,8 @@
             </Menu>
             <Menu mnemonicParsing="false" text="Zamówienia" fx:id="m_order">
               <items>
-                <MenuItem mnemonicParsing="false" text="Action 1" />
+                <MenuItem mnemonicParsing="false" onAction="#addOrder" text="Dodaj zamówienie" fx:id="m_add_order" />
+                <MenuItem mnemonicParsing="false" text="Unspecified Action" />
               </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Towary" fx:id="m_cloth">

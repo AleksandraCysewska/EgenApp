@@ -4,7 +4,7 @@ import cysewska.com.models.dto.ClothDTO;
 import cysewska.com.models.entities.ClothEntity;
 import cysewska.com.models.entities.ModelEntity;
 import cysewska.com.models.enums.Model;
-import cysewska.com.repositories.ClothRepository;
+import cysewska.com.repositories.ModelRepository;
 import cysewska.com.controllers.interfaces.ICloth;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 public class ClothViewImp implements ICloth {
     private TableColumn model, clothNamePL, clothNameNO, clothNameENG, priceEuro, pricePl;
     @Autowired
-    ClothRepository clothRepository;
+    ModelRepository clothRepository;
     @Autowired
     MainView mainView;
 

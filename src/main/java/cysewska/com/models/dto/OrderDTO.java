@@ -23,8 +23,8 @@ public class OrderDTO {
 
     String orderName;
     String descriptionName;
-    Date dateOfSubmit;
-    Date dateOfExecution;
+    String dateOfSubmit;
+    String dateOfExecution;
 
 
     public String getDepartmentName() {
@@ -59,23 +59,23 @@ public class OrderDTO {
         this.descriptionName = descriptionName;
     }
 
-    public Date getDateOfSubmit() {
+    public String getDateOfSubmit() {
         return dateOfSubmit;
     }
 
-    public void setDateOfSubmit(Date dateOfSubmit) {
+    public void setDateOfSubmit(String dateOfSubmit) {
         this.dateOfSubmit = dateOfSubmit;
     }
 
-    public Date getDateOfExecution() {
+    public String getDateOfExecution() {
         return dateOfExecution;
     }
 
-    public void setDateOfExecution(Date dateOfExecution) {
+    public void setDateOfExecution(String dateOfExecution) {
         this.dateOfExecution = dateOfExecution;
     }
 
-    public OrderDTO(String departmentName, String branchName, String orderName, String descriptionName, Date dateOfSubmit, Date dateOfExecution) {
+    public OrderDTO(String departmentName, String branchName, String orderName, String descriptionName, String dateOfSubmit, String dateOfExecution) {
 
         this.departmentName = departmentName;
         this.branchName = branchName;

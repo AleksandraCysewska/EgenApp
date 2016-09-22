@@ -122,6 +122,11 @@
         <artifactId>lombok</artifactId>
         <version>0.10.1</version>
     </dependency>
+    <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-c3p0</artifactId>
+        <version>4.3.7.Final</version>
+    </dependency>
 <!--    <dependency>
         <groupId>de.roskenet</groupId>
         <artifactId>springboot-javafx-support</artifactId>
