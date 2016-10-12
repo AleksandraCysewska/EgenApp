@@ -2,30 +2,75 @@
 
 <?import java.lang.*?>
 <?import java.util.*?>
+<?import javafx.collections.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 
-<AnchorPane id="AnchorPane" fx:id="contractor_window" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="449.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="cysewska.com.controllers.AddContractorWindow">
+<AnchorPane id="AnchorPane" fx:id="contractor_window" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="449.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
   <children>
-    <Label layoutX="90.0" layoutY="26.0" text="Filia" />
-    <Label layoutX="90.0" layoutY="62.0" text="Oddział" />
-  <!--  <TextField id="t_" fx:id="t_branch" layoutX="205.0" layoutY="23.0" prefWidth="200.0" />
-    <TextField id="t_dep" fx:id="t_department" layoutX="205.0" layoutY="62.0" prefWidth="200.0" />-->
-    <Label layoutX="90.0" layoutY="101.0" text="Typ NIPu" />
-    <Label layoutX="90.0" layoutY="137.0" text="NIP" />
-    <!--<TextField fx:id="t_typeOfNip" layoutX="205.0" layoutY="101.0" prefWidth="200.0" />
-    <TextField fx:id="t_nip" layoutX="205.0" layoutY="137.0" prefWidth="200.0" />-->
-    <Label layoutX="90.0" layoutY="176.0" text="Kraj" />
-    <Label layoutX="90.0" layoutY="212.0" text="Miasto" />
-   <!-- <TextField fx:id="t_country" layoutX="205.0" layoutY="176.0" prefWidth="200.0" />
-    <TextField fx:id="t_city" layoutX="205.0" layoutY="212.0" prefWidth="200.0" />-->
-    <Label layoutX="90.0" layoutY="246.0" text="Adres" />
-    <Label layoutX="90.0" layoutY="282.0" text="Kod pocztowy" />
-  <!--  <TextField fx:id="t_address" layoutX="205.0" layoutY="246.0" prefWidth="200.0" />-->
-   <!-- <TextField fx:id="t_zip" layoutX="205.0" layoutY="282.0" prefWidth="200.0" />-->
-    <Label layoutX="90.0" layoutY="318.0" text="Email" />
-    <Label layoutX="90.0" layoutY="354.0" text="Telefon" />
-
+    <GridPane prefHeight="449.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <children>
+        <Label prefWidth="120.0" text="Filia" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+        <Label prefWidth="120.0" text="Oddział" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+        <Label prefWidth="120.0" text="Typ NIPu" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+        <Label prefWidth="120.0" text="NIP" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
+        <Label prefWidth="120.0" text="Kraj" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
+        <Label prefWidth="120.0" text="Miasto" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="6" />
+        <Label prefWidth="120.0" text="Adres" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="7" />
+        <Label prefWidth="120.0" text="Kod pocztowy" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="8" />
+        <Label prefWidth="120.0" text="Email" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="9" />
+        <Label prefWidth="120.0" text="Telefon" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="10" />
+        <ComboBox fx:id="c_branch" prefHeight="21.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+          <items>
+            <FXCollections fx:factory="observableArrayList">
+              <String fx:value="Item 1" />
+              <String fx:value="Item 2" />
+              <String fx:value="Item 3" />
+            </FXCollections>
+          </items>
+        </ComboBox>
+        <ComboBox fx:id="c_type" prefHeight="21.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+          <items>
+            <FXCollections fx:factory="observableArrayList">
+              <String fx:value="Item 1" />
+              <String fx:value="Item 2" />
+              <String fx:value="Item 3" />
+            </FXCollections>
+          </items>
+        </ComboBox>
+        <TextField fx:id="t_department" maxWidth="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+        <TextField fx:id="t_nip" maxWidth="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+        <TextField fx:id="t_country" maxWidth="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+        <TextField fx:id="t_city" maxWidth="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
+        <TextField fx:id="t_address" maxWidth="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
+        <TextField fx:id="t_zip" maxWidth="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
+        <TextField fx:id="t_email" maxWidth="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="9" />
+        <TextField fx:id="t_telephone" maxWidth="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="10" />
+        <Button fx:id="b_save" mnemonicParsing="false" onAction="#save" prefHeight="25.0" prefWidth="120.0" text="Zapisz" translateX="-50.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="12" />
+        <Button mnemonicParsing="false" onAction="#cancel" prefHeight="25.0" prefWidth="120.0" text="Anuluj" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="12" />
+      </children>
+      <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="10.0" prefWidth="200.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="306.0" minWidth="10.0" prefWidth="306.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="193.0" minWidth="10.0" prefWidth="94.0" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      </rowConstraints>
+    </GridPane>
   </children>
 </AnchorPane>

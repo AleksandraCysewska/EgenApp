@@ -14,7 +14,7 @@ import java.util.Date;
 @Table(name = "INVOICE")
 public class InvoiceEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+  //  @GeneratedValue(strategy = GenerationType.TABLE)
     @Column(name = "INVOICE_ID")
     Long id;
     @Column(name = "INVOICE_NAME")
@@ -22,9 +22,9 @@ public class InvoiceEntity {
     @Column(name = "LANGUAGE_OF_INVOICE")
     String language;
     @Column(name = "TYPE_OF_PAYMENT")
-    TypeOfPayment typeOfPayment;
+    String typeOfPayment;
     @Column(name = "TERM_OF_PAYMENT")
-    Date termOfPayment;
+    String termOfPayment;
     @Column(name = "WEIGHT_NETTO")
     Integer weightNetto;
     @Column(name = "WEIGHT_BRUTTO")
@@ -32,7 +32,7 @@ public class InvoiceEntity {
     @Column(name = "QUANTITY_OF_PALLET")
     Integer quantityOfPallet;
     @Column(name = "DATE_OF_EXHIBIT")
-    Date date;
+    String date;
 
     @ManyToOne
     @JoinColumn(name="ORDER_ID")
@@ -40,6 +40,7 @@ public class InvoiceEntity {
 
     public InvoiceEntity() {
     }
+
 
     public Long getId() {
 
@@ -66,19 +67,19 @@ public class InvoiceEntity {
         this.language = language;
     }
 
-    public TypeOfPayment getTypeOfPayment() {
+    public String getTypeOfPayment() {
         return typeOfPayment;
     }
 
-    public void setTypeOfPayment(TypeOfPayment typeOfPayment) {
+    public void setTypeOfPayment(String typeOfPayment) {
         this.typeOfPayment = typeOfPayment;
     }
 
-    public Date getTermOfPayment() {
+    public String getTermOfPayment() {
         return termOfPayment;
     }
 
-    public void setTermOfPayment(Date termOfPayment) {
+    public void setTermOfPayment(String termOfPayment) {
         this.termOfPayment = termOfPayment;
     }
 
@@ -106,11 +107,11 @@ public class InvoiceEntity {
         this.quantityOfPallet = quantityOfPallet;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -122,7 +123,7 @@ public class InvoiceEntity {
         this.orderEntity = orderEntity;
     }
 
-    public InvoiceEntity(Long id, String name, String language, TypeOfPayment typeOfPayment, Date termOfPayment, Integer weightNetto, Integer weightBrutto, Integer quantityOfPallet, Date date, OrderEntity orderEntity) {
+    public InvoiceEntity(Long id, String name, String language, String typeOfPayment, String termOfPayment, Integer weightNetto, Integer weightBrutto, Integer quantityOfPallet, String date, OrderEntity orderEntity) {
 
         this.id = id;
         this.name = name;

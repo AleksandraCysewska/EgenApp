@@ -1,4 +1,4 @@
-package cysewska.com.controllers.interfaces;
+package cysewska.com.services.interfaces;
 
 /**
  * Created by Ola on 2016-09-05.

@@ -7,7 +7,7 @@ import cysewska.com.models.enums.Model;
  */
 public class ClothDTO {
 
-    Model model;
+    String model;
     String clothNamePL;
     String clothNameNO;
     String clothNameENG;
@@ -31,11 +31,11 @@ public class ClothDTO {
 
 
 
-    public Model getModel() {
+    public String getModel() {
         return model;
     }
 
-    public void setModel(Model model) {
+    public void setModel(String model) {
         this.model = model;
     }
 
@@ -79,7 +79,7 @@ public class ClothDTO {
         this.pricePl = pricePl;
     }
 
-    public ClothDTO( Model model, String clothNamePL, String clothNameNO, String clothNameENG,  Integer priceEuro, Integer pricePl) {
+    public ClothDTO( String model, String clothNamePL, String clothNameNO, String clothNameENG,  Integer priceEuro, Integer pricePl) {
 
 
         this.model = model;

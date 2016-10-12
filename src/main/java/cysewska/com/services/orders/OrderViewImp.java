@@ -1,9 +1,10 @@
-package cysewska.com.controllers;
+package cysewska.com.services.orders;
 
+import cysewska.com.controllers.MainView;
 import cysewska.com.models.dto.OrderDTO;
 import cysewska.com.models.entities.OrderEntity;
 import cysewska.com.repositories.OrderRepository;
-import cysewska.com.controllers.interfaces.IOrder;
+import cysewska.com.services.interfaces.IOrder;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
@@ -30,12 +31,12 @@ public class OrderViewImp implements IOrder {
 
     public void createTableName() {
 
-        this.branchName = new TableColumn("branchName");
-        this.departmentName = new TableColumn("departmentName");
-        this.orderName = new TableColumn("orderName");
-        this.descriptionName = new TableColumn("descriptionName");
-        this.dateOfSubmit = new TableColumn("dateOfSubmit");
-        this.dateOfExecution = new TableColumn("dateOfExecution");
+        this.branchName = new TableColumn("Filia");
+        this.departmentName = new TableColumn("Oddział");
+        this.orderName = new TableColumn("Nazwa zamówienia");
+        this.descriptionName = new TableColumn("Uwagi");
+        this.dateOfSubmit = new TableColumn("Data złożenia");
+        this.dateOfExecution = new TableColumn("Data realizacji");
 
 
     }

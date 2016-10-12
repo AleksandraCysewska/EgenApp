@@ -1,5 +1,6 @@
-package cysewska.com.controllers;
+package cysewska.com.services.invoices;
 
+import cysewska.com.controllers.MainView;
 import cysewska.com.models.dto.InvoiceDTO;
 import cysewska.com.models.entities.InvoiceEntity;
 import cysewska.com.models.enums.TypeOfPayment;
@@ -31,16 +32,16 @@ public class InvoiceViewImp {
 
     public void createTableName() {
 
-        this.name = new TableColumn("name");
-        this.language = new TableColumn("language");
-        this.branchName = new TableColumn("branchName");
-        this.departmentName = new TableColumn("departmentName");
-        this.date = new TableColumn("date");
-        this.typeOfPayment = new TableColumn("typeOfPayment");
-        this.termOfPayment = new TableColumn("termOfPayment");
-        this.weightNetto = new TableColumn("weightNetto");
-        this.weightBrutto = new TableColumn("weightBrutto");
-        this.quantityOfPallet = new TableColumn("quantityOfPallet");
+        this.name = new TableColumn("Nazwa fakturty");
+        this.language = new TableColumn("Język");
+        this.branchName = new TableColumn("Filia");
+        this.departmentName = new TableColumn("Oddział");
+        this.date = new TableColumn("Data wystawienia");
+        this.typeOfPayment = new TableColumn("Typ płatności");
+        this.termOfPayment = new TableColumn("Termin platności");
+        this.weightNetto = new TableColumn("Waga netto");
+        this.weightBrutto = new TableColumn("Waga brutto");
+        this.quantityOfPallet = new TableColumn("Ilość palet");
 
 
     }
@@ -50,9 +51,9 @@ public class InvoiceViewImp {
         departmentName.setCellValueFactory(new PropertyValueFactory<InvoiceDTO, String>("departmentName"));
         name.setCellValueFactory(new PropertyValueFactory<InvoiceDTO, String>("name"));
         language.setCellValueFactory(new PropertyValueFactory<InvoiceDTO, String>("language"));
-        date.setCellValueFactory(new PropertyValueFactory<InvoiceDTO, Date>("date"));
+        date.setCellValueFactory(new PropertyValueFactory<InvoiceDTO, String>("date"));
         typeOfPayment.setCellValueFactory(new PropertyValueFactory<InvoiceDTO, TypeOfPayment>("typeOfPayment"));
-        termOfPayment.setCellValueFactory(new PropertyValueFactory<InvoiceDTO, Date>("termOfPayment"));
+        termOfPayment.setCellValueFactory(new PropertyValueFactory<InvoiceDTO, String>("termOfPayment"));
         quantityOfPallet.setCellValueFactory(new PropertyValueFactory<InvoiceDTO, Integer>("quantityOfPallet"));
         weightNetto.setCellValueFactory(new PropertyValueFactory<InvoiceDTO, Integer>("weightNetto"));
         weightBrutto.setCellValueFactory(new PropertyValueFactory<InvoiceDTO, Integer>("weightBrutto"));
@@ -68,7 +69,7 @@ public class InvoiceViewImp {
         for (InvoiceEntity invoiceEntity : invoiceEntities) {
             invoiceDTOs.add(new InvoiceDTO(invoiceEntity.getOrderEntity().getDepartmentEntity().getName(),
                     invoiceEntity.getOrderEntity().getDepartmentEntity().getBranchEntity().getName(),
-                    invoiceEntity.getName(), invoiceEntity.getLanguage(), invoiceEntity.getDate(),
+                    invoiceEntity.getName(), invoiceEntity.getLanguage(), invoiceEntity.getDate().toString(),
                     invoiceEntity.getTypeOfPayment(), invoiceEntity.getTermOfPayment(), invoiceEntity.getWeightNetto(),
                     invoiceEntity.getWeightBrutto(), invoiceEntity.getQuantityOfPallet()));
         }

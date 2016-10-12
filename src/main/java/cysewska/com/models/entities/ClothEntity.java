@@ -99,7 +99,20 @@ public class ClothEntity {
         this.modelEntity = modelEntity;
     }
 
+    public ClothEntity() {
+    }
 
+    public ClothEntity(Long id, String clothNamePL, String clothNameNO, String clothNameENG, Byte[] clothImage, Integer priceEuro, Integer pricePl, ModelEntity modelEntity) {
+        this.id = id;
+        this.clothNamePL = clothNamePL;
+        this.clothNameNO = clothNameNO;
+        this.clothNameENG = clothNameENG;
+        this.clothImage = clothImage;
+
+        this.priceEuro = priceEuro;
+        this.pricePl = pricePl;
+        this.modelEntity = modelEntity;
+    }
 
     public Set<Textile_Cloth_Entity> getTextile_cloths() {
         return textile_cloths;

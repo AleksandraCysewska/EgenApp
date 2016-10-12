@@ -1,5 +1,6 @@
-package cysewska.com.controllers;
+package cysewska.com.services.textiles;
 
+import cysewska.com.controllers.MainView;
 import cysewska.com.models.dto.TextileDTO;
 import cysewska.com.models.entities.TextileEntity;
 import cysewska.com.models.enums.Colors;
@@ -29,10 +30,10 @@ public class TextileViewImp {
 
     public void createTableName() {
 
-        this.name = new TableColumn("name");
-        this.colors = new TableColumn("colors");
-        this.textileQuantity = new TableColumn("textileQuantity");
-        this.textileThickness = new TableColumn("textileThickness");
+        this.name = new TableColumn("Nazwa tkaniny");
+        this.colors = new TableColumn("Kolor");
+        this.textileQuantity = new TableColumn("Liczba");
+        this.textileThickness = new TableColumn("Grubość");
     }
 
     public void setTableName() {

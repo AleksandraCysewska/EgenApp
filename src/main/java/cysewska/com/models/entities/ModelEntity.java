@@ -11,14 +11,20 @@ import java.util.Set;
 
 
 @Entity
-@Table(name = "MODEL")
+@Table(name = "MODELS")
 public class ModelEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+  //  @GeneratedValue(strategy = GenerationType.TABLE)
     @Column(name = "MODEL_ID")
     Long id;
     @Column(name = "MODEL_NAME")
-    Model model;
+    String model;
+
+    public ModelEntity(Long id, String model) {
+        this.id = id;
+        this.model = model;
+
+    }
 
     @Override
     public String toString() {
@@ -27,6 +33,9 @@ public class ModelEntity {
                 ", model=" + model +
 
                 '}';
+    }
+
+    public ModelEntity() {
     }
 
     @OneToMany(mappedBy="modelEntity", fetch = FetchType.EAGER,cascade = CascadeType.ALL)
@@ -40,11 +49,11 @@ public class ModelEntity {
         this.id = id;
     }
 
-    public Model getModel() {
+    public String getModel() {
         return model;
     }
 
-    public void setModel(Model model) {
+    public void setModel(String model) {
         this.model = model;
     }
 

@@ -1,11 +1,12 @@
-package cysewska.com.controllers;
+package cysewska.com.services.cloths;
 
+import cysewska.com.controllers.MainView;
 import cysewska.com.models.dto.ClothDTO;
 import cysewska.com.models.entities.ClothEntity;
 import cysewska.com.models.entities.ModelEntity;
 import cysewska.com.models.enums.Model;
 import cysewska.com.repositories.ModelRepository;
-import cysewska.com.controllers.interfaces.ICloth;
+import cysewska.com.services.interfaces.ICloth;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
@@ -36,12 +37,12 @@ public class ClothViewImp implements ICloth {
         fillClothTableData();
     }
     public void createTableClothColumn() {
-        this.model = new TableColumn("model");
-        this.clothNamePL = new TableColumn("clothNamePL");
-        this.clothNameNO = new TableColumn("clothNameNO");
-        this.clothNameENG = new TableColumn("clothNameENG");
-        this.priceEuro = new TableColumn("priceEuro");
-        this.pricePl = new TableColumn("pricePl");
+        this.model = new TableColumn("Model");
+        this.clothNamePL = new TableColumn("Nazwa ubrania");
+        this.clothNameNO = new TableColumn("Nazwa norwerska");
+        this.clothNameENG = new TableColumn("Nazwa angielska");
+        this.priceEuro = new TableColumn("Cena w euro");
+        this.pricePl = new TableColumn("Cena polska");
     }
     public void setTableClothColumnName() {
       mainView.getTableCloth().getColumns().clear();

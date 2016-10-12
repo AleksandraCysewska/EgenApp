@@ -1,5 +1,6 @@
-package cysewska.com.controllers;
+package cysewska.com.services.contractors;
 
+import cysewska.com.controllers.MainView;
 import cysewska.com.models.dto.ContractorDTO;
 import cysewska.com.models.entities.BranchEntity;
 import cysewska.com.repositories.BranchRepository;
@@ -29,15 +30,15 @@ public class ContractorView  {
 
     public void createTableName() {
 
-        this.branchName = new TableColumn("branchName");
-        this.departmentName = new TableColumn("departmentName");
-        this.nip = new TableColumn("nip");
-        this.country = new TableColumn("country");
-        this.city = new TableColumn("city");
-        this.address = new TableColumn("address");
-        this.zip = new TableColumn("zip");
-        this.email = new TableColumn("email");
-        this.telephone = new TableColumn("telephone");
+        this.branchName = new TableColumn("Nazwa fili");
+        this.departmentName = new TableColumn("Nazwa oddziału");
+        this.nip = new TableColumn("NIP");
+        this.country = new TableColumn("Kraj");
+        this.city = new TableColumn("Miasto");
+        this.address = new TableColumn("Adres");
+        this.zip = new TableColumn("Kod pocztowy");
+        this.email = new TableColumn("Email");
+        this.telephone = new TableColumn("Numer telefonu");
 
     }
 

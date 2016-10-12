@@ -29,19 +29,21 @@
           <children>
             <GridPane prefHeight="196.0" prefWidth="598.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <children>
-                <Label prefWidth="88.0" text="Filia" textAlignment="CENTER" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-                <Label prefWidth="88.0" text="Oddział" textAlignment="CENTER" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-                <Label text="Data utworzenia" textAlignment="CENTER" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
-                <Label prefWidth="93.0" text="Data realizacji" textAlignment="CENTER" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
-                <Label prefWidth="88.0" text="Uwagi" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER" />
-                <DatePicker fx:id="t_create" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                <DatePicker fx:id="t_do" prefWidth="199.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                <Label prefWidth="143.0" text="Dane zamówienia:" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                <Label prefWidth="88.0" text="Model" textAlignment="CENTER" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                <Label prefWidth="88.0" text="Nazwa polska" textAlignment="CENTER" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                <Label text="Nazwa angielska" textAlignment="CENTER" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+                <Label prefWidth="93.0" text="Nazwa norweska" textAlignment="CENTER" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
+                <Label prefWidth="88.0" text="Cena polska" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER" />
+                <TextField fx:id="t_name" maxWidth="213.0" prefWidth="213.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <TextField fx:id="t_nameENG" maxWidth="213.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                <TextField fx:id="t_nameNO" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                <TextField fx:id="t_price" prefWidth="212.9998779296875" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                <Label prefWidth="88.0" text="Dane towaru:" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                   <font>
                     <Font name="System Bold Italic" size="13.5" fx:id="x2" />
                   </font>
                 </Label>
-                <ComboBox fx:id="c_branch" prefHeight="21.0" prefWidth="199.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                <ComboBox fx:id="c_model" prefHeight="21.0" prefWidth="213.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                   <items>
                     <FXCollections fx:factory="observableArrayList">
                       <String fx:value="Item 1" />
@@ -50,21 +52,11 @@
                     </FXCollections>
                   </items>
                 </ComboBox>
-                <ComboBox id="c_model" fx:id="c_department" prefHeight="21.0" prefWidth="199.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                  <items>
-                    <FXCollections fx:factory="observableArrayList">
-                      <String fx:value="Item 1" />
-                      <String fx:value="Item 2" />
-                      <String fx:value="Item 3" />
-                    </FXCollections>
-                  </items>
-                </ComboBox>
-                <TextArea fx:id="t_description" maxWidth="200.0" prefHeight="20.0" prefWidth="200.0" translateY="10.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="6" />
               </children>
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="276.0" minWidth="10.0" prefWidth="253.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="277.0" minWidth="10.0" prefWidth="224.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="198.0" minWidth="10.0" prefWidth="121.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="229.0" minWidth="10.0" prefWidth="229.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="230.0" minWidth="10.0" prefWidth="213.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="198.0" minWidth="10.0" prefWidth="156.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -87,8 +79,8 @@
                   <children>
                     <GridPane prefHeight="178.0" prefWidth="596.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                       <children>
-                        <Label font="$x2" prefWidth="93.0" text="Dane towaru:" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" />
-                        <ComboBox id="c_textile" fx:id="c_cloth" prefHeight="21.0" prefWidth="199.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                        <Label font="$x2" prefWidth="93.0" text="Dane tkanin:" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" />
+                        <ComboBox fx:id="c_textile" prefHeight="21.0" prefWidth="213.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                           <items>
                             <FXCollections fx:factory="observableArrayList">
                               <String fx:value="Item 1" />
@@ -98,15 +90,15 @@
                           </items>
                         </ComboBox>
                         <TextField fx:id="t_quantity" prefWidth="148.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <Label prefWidth="88.0" text="Nazwa towaru" textAlignment="CENTER" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-                        <Label prefWidth="88.0" text="Liczba towaru" textAlignment="CENTER" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-                        <Button mnemonicParsing="false" onAction="#add" prefWidth="100.0" text="Dodaj" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+                        <Label prefWidth="88.0" text="Nazwa tkaniny" textAlignment="CENTER" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                        <Label prefWidth="88.0" text="Liczba tkaniny" textAlignment="CENTER" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
                         <Button mnemonicParsing="false" onAction="#delete" prefWidth="100.0" text="Usuń" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="3" />
+                        <Button mnemonicParsing="false" onAction="#add" prefWidth="100.0" text="Dodaj" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
                       </children>
                       <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="252.0" minWidth="10.0" prefWidth="252.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="259.0" minWidth="10.0" prefWidth="203.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="197.0" minWidth="10.0" prefWidth="141.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="226.0" minWidth="10.0" prefWidth="226.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="250.0" minWidth="10.0" prefWidth="208.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="197.0" minWidth="10.0" prefWidth="162.0" />
                       </columnConstraints>
                       <rowConstraints>
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -120,24 +112,24 @@
                 </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                   <children>
-                    <SplitPane dividerPositions="0.7272727272727273" focusTraversable="true" orientation="VERTICAL" prefHeight="120.0" prefWidth="596.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <SplitPane dividerPositions="0.6193181818181818" focusTraversable="true" orientation="VERTICAL" prefHeight="120.0" prefWidth="596.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                       <items>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                           <children>
-                            <TableView fx:id="tableTextiles" prefHeight="104.0" prefWidth="594.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                            <TableView fx:id="tableTextiles" prefHeight="120.0" prefWidth="594.0" AnchorPane.bottomAnchor="-14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                           </children>
                         </AnchorPane>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                           <children>
-                            <GridPane maxHeight="56.0" prefHeight="56.0" prefWidth="594.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <GridPane prefHeight="56.0" prefWidth="594.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                               <children>
-                                <Button mnemonicParsing="false" onAction="#saveOrder" prefHeight="25.0" prefWidth="120.0" text="Zapisz" GridPane.columnIndex="2" GridPane.rowIndex="0" />
-                                <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" text="Anuluj" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                                <Button fx:id="b_save" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" text="Zapisz" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+                                <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" text="Edytuj" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0" />
                               </children>
                               <columnConstraints>
-                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="198.0" minWidth="10.0" prefWidth="60.0" />
-                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="310.0" minWidth="10.0" prefWidth="310.0" />
-                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="230.0" minWidth="10.0" prefWidth="224.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="198.0" minWidth="10.0" prefWidth="188.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="207.0" minWidth="10.0" prefWidth="207.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="217.0" minWidth="10.0" prefWidth="199.0" />
                               </columnConstraints>
                               <rowConstraints>
                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />

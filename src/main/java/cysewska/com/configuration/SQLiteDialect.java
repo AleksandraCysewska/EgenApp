@@ -38,7 +38,8 @@ public class SQLiteDialect extends Dialect {
         registerColumnType(Types.BLOB, "blob");
         registerColumnType(Types.CLOB, "clob");
         registerColumnType(Types.BOOLEAN, "integer");
-
+        registerColumnType(Types.NULL, "null");
+        registerHibernateType(Types.NULL, "null");
         registerFunction( "concat", new VarArgsSQLFunction(StringType.INSTANCE, "", "||", "") );
         registerFunction( "mod", new SQLFunctionTemplate( StringType.INSTANCE, "?1 % ?2" ) );
         registerFunction( "substr", new StandardSQLFunction("substr", StringType.INSTANCE) );
@@ -49,24 +50,9 @@ public class SQLiteDialect extends Dialect {
         return true;
     }
 
-  /*
-  public boolean supportsInsertSelectIdentity() {
-    return true; // As specify in NHibernate dialect
-  }
-  */
-
     public boolean hasDataTypeInIdentityColumn() {
         return false; // As specify in NHibernate dialect
     }
-
-  /*
-  public String appendIdentitySelectToInsert(String insertString) {
-    return new StringBuffer(insertString.length()+30). // As specify in NHibernate dialect
-      append(insertString).
-      append("; ").append(getIdentitySelectString()).
-      toString();
-  }
-  */
 
     public String getIdentityColumnString() {
         // return "integer primary key autoincrement";

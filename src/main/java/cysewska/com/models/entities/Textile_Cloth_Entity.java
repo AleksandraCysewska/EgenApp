@@ -10,9 +10,22 @@ import javax.persistence.*;
 @Table(name = "TEXTILE_CLOTH")
 public class Textile_Cloth_Entity {
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+   // @GeneratedValue(strategy = GenerationType.TABLE)
     @Column(name = "TEXTILE_CLOTH_ID")
     Long id;
+
+    public Textile_Cloth_Entity() {
+
+    }
+
+    public Textile_Cloth_Entity(Long id, Integer textileClothQuantities, ClothEntity clothEntity, TextileEntity textileEntity) {
+
+        this.id = id;
+        this.textileClothQuantities = textileClothQuantities;
+        this.clothEntity = clothEntity;
+        this.textileEntity = textileEntity;
+    }
+
     @Column(name = "TEXTILE_CLOTH_QUANTITIES")
     Integer textileClothQuantities;
 

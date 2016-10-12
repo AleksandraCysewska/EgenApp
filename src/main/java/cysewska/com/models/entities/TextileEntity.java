@@ -15,17 +15,26 @@ import java.util.Set;
 @Table(name = "TEXTILE")
 public class TextileEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+  //  @GeneratedValue (strategy = GenerationType.IDENTITY, generator = "TEXTILE_SEQ")
+  //  @SequenceGenerator ( name = "TEXTILE_SEQ" , sequenceName = "TEXTILE_SEQ")
     @Column(name = "TEXTILE_ID")
     Long id;
     @Column(name = "TEXTILE_NAME")
     String name;
     @Column(name = "TEXTILE_COLOR")
-    Colors colors;
+    String colors;
     @Column(name ="TEXTILE_QUANTITY" )
     Integer textileQuantity;
     @Column(name ="TEXTILE_THICKNESS" )
     Integer textileThickness;
+
+    public TextileEntity(Long id, String name, String colors, Integer textileQuantity, Integer textileThickness) {
+        this.id = id;
+        this.name = name;
+        this.colors = colors;
+        this.textileQuantity = textileQuantity;
+        this.textileThickness = textileThickness;
+    }
 
     public Long getId() {
         return id;
@@ -55,11 +64,11 @@ public class TextileEntity {
         this.name = name;
     }
 
-    public Colors getColors() {
+    public String getColors() {
         return colors;
     }
 
-    public void setColors(Colors colors) {
+    public void setColors(String colors) {
         this.colors = colors;
     }
 
@@ -69,6 +78,9 @@ public class TextileEntity {
 
     public void setTextileQuantity(Integer textileQuantity) {
         this.textileQuantity = textileQuantity;
+    }
+
+    public TextileEntity() {
     }
 
     public Integer getTextileThickness() {

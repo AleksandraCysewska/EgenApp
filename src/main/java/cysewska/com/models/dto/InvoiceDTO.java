@@ -29,9 +29,9 @@ public class InvoiceDTO {
 
     String name;
     String language;
-    Date date;
-    TypeOfPayment typeOfPayment;
-    Date termOfPayment;
+    String date;
+    String typeOfPayment;
+    String termOfPayment;
     Integer weightNetto;
     Integer weightBrutto;
     Integer quantityOfPallet;
@@ -52,27 +52,27 @@ public class InvoiceDTO {
         this.language = language;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
-    public TypeOfPayment getTypeOfPayment() {
+    public String getTypeOfPayment() {
         return typeOfPayment;
     }
 
-    public void setTypeOfPayment(TypeOfPayment typeOfPayment) {
+    public void setTypeOfPayment(String typeOfPayment) {
         this.typeOfPayment = typeOfPayment;
     }
 
-    public Date getTermOfPayment() {
+    public String getTermOfPayment() {
         return termOfPayment;
     }
 
-    public void setTermOfPayment(Date termOfPayment) {
+    public void setTermOfPayment(String termOfPayment) {
         this.termOfPayment = termOfPayment;
     }
 
@@ -102,7 +102,7 @@ public class InvoiceDTO {
 
 
 
-    public InvoiceDTO(String departmentName, String branchName, String name, String language, Date date, TypeOfPayment typeOfPayment, Date termOfPayment, Integer weightNetto, Integer weightBrutto, Integer quantityOfPallet) {
+    public InvoiceDTO(String departmentName, String branchName, String name, String language, String date, String typeOfPayment, String termOfPayment, Integer weightNetto, Integer weightBrutto, Integer quantityOfPallet) {
         this.departmentName = departmentName;
         this.branchName = branchName;
         this.name = name;

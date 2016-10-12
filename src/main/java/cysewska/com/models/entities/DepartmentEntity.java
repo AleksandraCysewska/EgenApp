@@ -22,7 +22,7 @@ public class DepartmentEntity {
     @Column(name = "DEPARTMENT_NAME")
     String name;
     @Column(name = "TYPE_OF_NIP")
-    TypeOfNip typeOfNip;
+    String typeOfNip;
     @Column(name = "NIP")
     String nip;
     @Column(name = "COUNTRY")
@@ -47,7 +47,7 @@ public class DepartmentEntity {
     Set<OrderEntity> orders;
     public DepartmentEntity()
     {}
-    public DepartmentEntity(Integer id, String name, TypeOfNip typeOfNip, String nip, String country, String city, String address, String zip, String email, String telephone, BranchEntity branchEntity) {
+    public DepartmentEntity(Integer id, String name, String typeOfNip, String nip, String country, String city, String address, String zip, String email, String telephone, BranchEntity branchEntity) {
         this.id = id;
         this.name = name;
         this.typeOfNip = typeOfNip;
@@ -77,11 +77,11 @@ public class DepartmentEntity {
         this.name = name;
     }
 
-    public TypeOfNip getTypeOfNip() {
+    public String getTypeOfNip() {
         return typeOfNip;
     }
 
-    public void setTypeOfNip(TypeOfNip typeOfNip) {
+    public void setTypeOfNip(String typeOfNip) {
         this.typeOfNip = typeOfNip;
     }
 
