@@ -27,7 +27,7 @@
       <items>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
           <children>
-            <GridPane prefHeight="196.0" prefWidth="598.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <GridPane fx:id="mainGrid" prefHeight="196.0" prefWidth="598.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <children>
                 <Label prefWidth="88.0" text="Filia" textAlignment="CENTER" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
                 <Label prefWidth="88.0" text="Oddział" textAlignment="CENTER" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
@@ -83,9 +83,9 @@
           <children>
             <SplitPane dividerPositions="0.5" focusTraversable="true" orientation="VERTICAL" prefHeight="196.0" prefWidth="598.0" AnchorPane.bottomAnchor="2.5" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-2.5">
               <items>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                <AnchorPane fx:id="anchor" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                   <children>
-                    <GridPane prefHeight="178.0" prefWidth="596.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <GridPane fx:id="grid" prefHeight="178.0" prefWidth="596.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                       <children>
                         <Label font="$x2" prefWidth="93.0" text="Dane towaru:" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" />
                         <ComboBox id="c_textile" fx:id="c_cloth" prefHeight="21.0" prefWidth="199.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
@@ -127,12 +127,12 @@
                             <TableView fx:id="tableTextiles" prefHeight="104.0" prefWidth="594.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                           </children>
                         </AnchorPane>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                        <AnchorPane fx:id="anchorWithButton" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                           <children>
                             <GridPane maxHeight="56.0" prefHeight="56.0" prefWidth="594.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                               <children>
-                                <Button mnemonicParsing="false" onAction="#saveOrder" prefHeight="25.0" prefWidth="120.0" text="Zapisz" GridPane.columnIndex="2" GridPane.rowIndex="0" />
-                                <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" text="Anuluj" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                                <Button fx:id="save" mnemonicParsing="false" onAction="#saveOrder" prefHeight="25.0" prefWidth="120.0" text="Zapisz" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+                                <Button fx:id="cancel" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" text="Anuluj" GridPane.columnIndex="1" GridPane.rowIndex="0" />
                               </children>
                               <columnConstraints>
                                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="198.0" minWidth="10.0" prefWidth="60.0" />

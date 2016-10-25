@@ -1,5 +1,6 @@
 package cysewska.com.services.invoices;
 
+import com.itextpdf.text.DocumentException;
 import cysewska.com.controllers.MainView;
 import cysewska.com.models.entities.InvoiceEntity;
 import cysewska.com.models.entities.ModelEntity;
@@ -33,6 +34,7 @@ import org.hibernate.cfg.Configuration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
@@ -68,8 +70,9 @@ public class AddInvoice implements Initializable {
     ComboBox c_language;
     @FXML
     ComboBox c_payment;
-
-    public void save() {
+    @Autowired
+    CreateInvoices createInvoices;
+    public void save() throws FileNotFoundException, DocumentException {
 
 
         SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
@@ -106,6 +109,8 @@ public class AddInvoice implements Initializable {
 
         mainView.getTableInvoice().setItems(null);
         invoiceViewImp.fillTableData();
+
+        createInvoices.createInvoice();
     }
 @Autowired
 MainView mainView;

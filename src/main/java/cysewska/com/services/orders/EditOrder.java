@@ -163,11 +163,7 @@ public class EditOrder implements Initializable {
         SQLQuery depQuery = session2.createSQLQuery(dep);
         depQuery.setParameter("PARAM",mainView.getSelected() );
         depQuery.addEntity(OrderEntity.class);
-    list = depQuery.list();
-
-
-
-
+         list = depQuery.list();
 
 
         String sql3 = "SELECT * FROM BRANCH ";

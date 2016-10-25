@@ -10,7 +10,7 @@
 
 <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
   <children>
-    <GridPane prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+    <GridPane fx:id="gridMain" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <children>
         <Label prefWidth="120.0" text="Numer zamówienia" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1">
           <font>
@@ -47,8 +47,8 @@
             </FXCollections>
           </items>
         </ComboBox>
-        <Button mnemonicParsing="false" onAction="#cancel" prefHeight="25.0" prefWidth="120.0" text="Anuluj" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="10" />
-        <Button mnemonicParsing="false" onAction="#save" prefHeight="25.0" prefWidth="120.0" text="Generuj fakturę" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="10" />
+        <Button mnemonicParsing="false" fx:id="cancel" onAction="#cancel" prefHeight="25.0" prefWidth="120.0" text="Anuluj" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="10" />
+        <Button mnemonicParsing="false" fx:id="save" onAction="#save" prefHeight="25.0" prefWidth="120.0" text="Generuj fakturę" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="10" />
         <ComboBox fx:id="c_payment" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
           <items>
             <FXCollections fx:factory="observableArrayList">

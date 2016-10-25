@@ -199,6 +199,7 @@ public class AddCloth implements Initializable {
                         ));
                     }
                     session.getTransaction().commit();
+
                 }
         );
 
