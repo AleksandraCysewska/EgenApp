@@ -4,7 +4,6 @@ package cysewska.com.models.entities;
  * Created by cysewskaa on 2016-09-05.
  */
 
-import cysewska.com.models.enums.Model;
 
 import javax.persistence.*;
 import java.util.Set;

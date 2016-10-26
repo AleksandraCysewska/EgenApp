@@ -14,18 +14,15 @@ import cysewska.com.models.dto.OrderDTO;
 import cysewska.com.models.dto.TextileDTO;
 import cysewska.com.models.entities.*;
 import cysewska.com.repositories.*;
-import cysewska.com.services.cloths.AddCloth;
-import cysewska.com.services.cloths.ClothViewImp;
-import cysewska.com.services.cloths.EditCloth;
-import cysewska.com.services.cloths.InfoCloth;
-import cysewska.com.services.contractors.AddContractorWindow;
-import cysewska.com.services.contractors.ContractorView;
-import cysewska.com.services.contractors.EditContractor;
+import cysewska.com.services.cloths.*;
+import cysewska.com.services.contractors.*;
+import cysewska.com.services.help.SendError;
 import cysewska.com.services.invoices.*;
 import cysewska.com.services.orders.AddOrder;
 import cysewska.com.services.orders.EditOrder;
 import cysewska.com.services.orders.InfoOrders;
 import cysewska.com.services.orders.OrderViewImp;
+import cysewska.com.services.textiles.AddPW;
 import cysewska.com.services.textiles.AddTextile;
 import cysewska.com.services.textiles.EditTextile;
 import cysewska.com.services.textiles.TextileViewImp;
@@ -40,7 +37,11 @@ import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
@@ -87,7 +88,7 @@ public class MainView implements Initializable {
     SplitPane okienko;
     @FXML
     ComboBox c_search;
-@Autowired
+    @Autowired
     OrderRepository orderRepository;
     public TableView getTableContractor() {
         return table_contractor;
@@ -111,20 +112,70 @@ public class MainView implements Initializable {
 
     @Autowired
     AddInvoice addInvoice;
+    @Autowired
+    CreateInvoices createInvoices;
+    @Autowired
+    AddBranch addBranch;
+    @Autowired
+    AddModel addModel;
+    @Autowired
+    AddPW addPW;
+    public void addPW() throws IOException {
+
+        addPW.showWindow();
+
+    }
+    public void addBranch() throws IOException {
+        addBranch.showWindow();
+    }
+    @Autowired
+    EditBranch editBranch;
+
+    public void editBranch() throws IOException {
+
+        List<BranchEntity> all = branchRepository.findAll();
+        dialogData.addAll(all.stream().map(BranchEntity::getName).collect(Collectors.toList()));
+        ChoiceDialog choiceDialog = new ChoiceDialog(dialogData.get(0), dialogData);
+        choiceDialog.setTitle("Edytowanie filii");
+        choiceDialog.setHeaderText("Wybierz filię");
+        Optional<String> result = choiceDialog.showAndWait();
+        if (result.isPresent()) {
+            selected = result.get();}
+        editBranch.showWindow();
+    }
+
+    public void addModel() throws IOException {
+        addModel.showWindow();
+    }
+@Autowired
+EditModel editModel;
+    public void editModel() throws IOException {
+
+        List<ModelEntity> all = modelRepository.findAll();
+        dialogData.addAll(all.stream().map(ModelEntity::getModel).collect(Collectors.toList()));
+        ChoiceDialog choiceDialog = new ChoiceDialog(dialogData.get(0), dialogData);
+        choiceDialog.setTitle("Edytowanie modelu");
+        choiceDialog.setHeaderText("Wybierz model");
+        Optional<String> result = choiceDialog.showAndWait();
+        if (result.isPresent()) {
+            selected = result.get();}
+
+        editModel.showWindow();
+
+    }
 
 
     @FXML
     public void addInvoice(ActionEvent actionEvent) throws IOException, DocumentException {
-
         addInvoice.showWindow();
-
-
-
-
+      //  createInvoices.createInvoice();
+    }
+    @Autowired
+    SendError sendError;
+    public void sendError() throws IOException {
+        sendError.showWindow();
     }
 
-    public void button1(ActionEvent actionEvent) throws NoSuchFieldException {
-    }
 
     @Autowired
     AddContractorWindow add;
@@ -133,8 +184,7 @@ public class MainView implements Initializable {
 
     @FXML
     public void addContractor(ActionEvent actionEvent) throws IOException {
-        edit = false;
-        add.cos(selected, ""+edit);
+        add.createView();
     }
 
     @Autowired
@@ -645,6 +695,13 @@ public void refreshContractor(){
         //   selectedItem = (ContractorDTO) table_contractor.getSelectionModel().getSelectedItem();
         edit=true;
         editOrder.createView();
+    }
+    @Autowired
+    GenerateRaports generateRaports;
+    public void generateRaport() throws FileNotFoundException, DocumentException {
+
+        generateRaports.generate();
+
     }
     public void editCloth() throws IOException {
         List<ClothEntity> all = clothRepository.findAll();

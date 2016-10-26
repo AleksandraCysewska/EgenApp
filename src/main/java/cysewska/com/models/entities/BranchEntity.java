@@ -1,6 +1,9 @@
 package cysewska.com.models.entities;
 
+import com.sun.istack.internal.NotNull;
+
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 /**
@@ -12,17 +15,17 @@ import java.util.Set;
 @Table(name = "BRANCH")
 public class BranchEntity {
     @Id
-   // @GeneratedValue(strategy = GenerationType.TABLE)
     @Column(name = "BRANCH_ID")
     Long id;
-    @Column(name = "BRANCH_NAME")
+    @Column(name = "BRANCH_NAME", unique = true)
+    @Size(min = 3, message = "Nazwa musi być unikalna i zawierać minimum jeden znak.")
     String name;
 
 
-    public BranchEntity(Long id, String name, Set<DepartmentEntity> departments) {
+    public BranchEntity(Long id, String name) {
         this.id = id;
         this.name = name;
-        this.departments = departments;
+
     }
     public BranchEntity() {
 

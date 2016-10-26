@@ -4,7 +4,6 @@ import cysewska.com.controllers.MainView;
 import cysewska.com.models.dto.ClothDTO;
 import cysewska.com.models.entities.ClothEntity;
 import cysewska.com.models.entities.ModelEntity;
-import cysewska.com.models.enums.Model;
 import cysewska.com.repositories.ModelRepository;
 import cysewska.com.services.interfaces.ICloth;
 import javafx.collections.FXCollections;
@@ -47,7 +46,7 @@ public class ClothViewImp implements ICloth {
     public void setTableClothColumnName() {
       mainView.getTableCloth().getColumns().clear();
 
-        model.setCellValueFactory(new PropertyValueFactory<ClothDTO, Model>("model"));
+        model.setCellValueFactory(new PropertyValueFactory<ClothDTO, String>("model"));
         clothNamePL.setCellValueFactory(new PropertyValueFactory<ClothDTO, String>("clothNamePL"));
         clothNameNO.setCellValueFactory(new PropertyValueFactory<ClothDTO, String>("clothNameNO"));
         clothNameENG.setCellValueFactory(new PropertyValueFactory<ClothDTO, String>("clothNameENG"));

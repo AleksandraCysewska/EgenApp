@@ -4,7 +4,6 @@ import cysewska.com.controllers.MainView;
 import cysewska.com.models.dto.ClothOrderDTO;
 import cysewska.com.models.dto.TextileClothDTO;
 import cysewska.com.models.entities.*;
-import cysewska.com.models.enums.Model;
 import cysewska.com.repositories.*;
 import cysewska.com.services.contractors.AddContractorWindow;
 import javafx.beans.value.ChangeListener;
@@ -143,14 +142,15 @@ Stage stage;
         SQLQuery findTextile = session.createSQLQuery("SELECT * FROM CLOTH");
         findTextile.addEntity(ClothEntity.class);
         List<ClothEntity> textiles = findTextile.list();
-
+int licznik =0;
         for (ClothOrderDTO listViewitem : listViewitems) {
             session.save(new OrderClothEntity(
-                    textile_cloth_entities.stream().max(Comparator.comparing(OrderClothEntity::getId)).get().getId() + 1,
+                    textile_cloth_entities.stream().max(Comparator.comparing(OrderClothEntity::getId)).get().getId() + 1 + licznik,
                     Long.valueOf(listViewitem.getQuantity().toString()),
                     order,
                     textiles.stream().filter(e -> e.getClothNamePL().equals(listViewitem.getName().toString())).findAny().get()
             ));
+            licznik++;
         }
 
         session.getTransaction().commit();

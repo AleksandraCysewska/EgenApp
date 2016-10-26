@@ -14,7 +14,6 @@ import java.util.Date;
 @Table(name = "INVOICE")
 public class InvoiceEntity {
     @Id
-  //  @GeneratedValue(strategy = GenerationType.TABLE)
     @Column(name = "INVOICE_ID")
     Long id;
     @Column(name = "INVOICE_NAME")

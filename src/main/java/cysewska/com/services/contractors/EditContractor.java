@@ -5,12 +5,16 @@ import cysewska.com.models.entities.BranchEntity;
 import cysewska.com.models.entities.DepartmentEntity;
 import cysewska.com.models.enums.TypeOfNip;
 import cysewska.com.services.contractors.AddContractorWindow;
+import cysewska.com.services.validators.Validator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -21,10 +25,13 @@ import org.hibernate.cfg.Configuration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -52,8 +59,11 @@ public class EditContractor implements Initializable {
     TextField t_telephone;
     @FXML
     TextField t_city;
-
-    public void cancel(){}
+    @FXML
+    Validator validator;
+    public void cancel(ActionEvent event){
+        ((Node)(event.getSource())).getScene().getWindow().hide();
+    }
     public void save(){
         SessionFactory factory;
         factory = new Configuration().configure().buildSessionFactory();
@@ -74,15 +84,17 @@ public class EditContractor implements Initializable {
 
             departmentEntity.setBranchEntity(results3.stream().filter(e->e.getName().equals(c_branch.getValue().toString())).findFirst().get());
             departmentEntity.setTypeOfNip(c_type.getValue().toString());
-
-        }catch (HibernateException e) {
-            if (tx!=null) tx.rollback();
-            e.printStackTrace();
-        }finally {
             session.update(departmentEntity);
             tx.commit();
             session.close();
+
+        }catch (HibernateException e) {
+            if (tx != null) tx.rollback();
         }
+        catch(ConstraintViolationException e) {
+            validator.validate(e);
+        }
+
 
         mainView.getTableContractor().setItems(null);
         contractorView.fillTableData();
@@ -134,7 +146,7 @@ public class EditContractor implements Initializable {
             t_city.setText(departmentEntities.get(0).getCity());
             t_address.setText(departmentEntities.get(0).getAddress());
             t_zip.setText(departmentEntities.get(0).getZip());
-            t_email.setText(departmentEntities.get(0).getAddress());
+            t_email.setText(departmentEntities.get(0).getEmail());
             t_telephone.setText(departmentEntities.get(0).getTelephone());
             c_branch.getSelectionModel().select(departmentEntities.get(0).getBranchEntity().getName());
             c_type.getSelectionModel().select(departmentEntities.get(0).getTypeOfNip());

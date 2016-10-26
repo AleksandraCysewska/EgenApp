@@ -4,14 +4,17 @@ import cysewska.com.controllers.MainView;
 import cysewska.com.models.entities.BranchEntity;
 import cysewska.com.models.entities.DepartmentEntity;
 import cysewska.com.models.enums.TypeOfNip;
+import cysewska.com.services.validators.Validator;
 import javafx.application.Application;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -25,6 +28,9 @@ import org.hibernate.cfg.Configuration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
+import javax.validation.Valid;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
@@ -34,7 +40,7 @@ import java.util.stream.Collectors;
  * Created by Ola on 2016-09-18.
  */
 @Component
-public class AddContractorWindow extends Application implements Initializable {
+public class AddContractorWindow implements Initializable {
 
     private AnchorPane root;
   @FXML
@@ -59,7 +65,8 @@ public class AddContractorWindow extends Application implements Initializable {
     TextField t_city;
 
     Stage stage ;
-
+@Autowired
+    Validator validator;
 
     public void createView() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/crud_contractor.fxml"));
@@ -78,7 +85,7 @@ public class AddContractorWindow extends Application implements Initializable {
         stage.centerOnScreen();
         stage.toFront();
     }
-    public void save() {
+    public DepartmentEntity createDepartment(){
         SessionFactory sessionFactory2 = new Configuration().configure().buildSessionFactory();
         Session session2 = sessionFactory2.openSession();
         session2.beginTransaction();
@@ -91,7 +98,7 @@ public class AddContractorWindow extends Application implements Initializable {
         SQLQuery depQuery = session2.createSQLQuery(dep);
         depQuery.addEntity(DepartmentEntity.class);
         List<DepartmentEntity> departmentEntities = depQuery.list();
-        session2.save(new DepartmentEntity(
+        DepartmentEntity departmentEntity = new DepartmentEntity(
                 departmentEntities.stream().max(Comparator.comparing(DepartmentEntity::getId)).get().getId() + 1,
                 t_department.getText(),
                 c_type.getValue().toString(),
@@ -103,42 +110,40 @@ public class AddContractorWindow extends Application implements Initializable {
                 t_email.getText(),
                 t_telephone.getText(),
                 results3.stream().filter(e -> e.getName().equals(c_branch.getValue().toString())).findFirst().get()
-        ));
+        );
         session2.getTransaction().commit();
+        return departmentEntity;
+    }
+
+    public void save(ActionEvent event) {
+
+        SessionFactory sessionFactory2 = new Configuration().configure().buildSessionFactory();
+        Session session2 = sessionFactory2.openSession();
+        session2.beginTransaction();
+        try{
+            session2.save((createDepartment()));
+            session2.getTransaction().commit();
+        }
+        catch(ConstraintViolationException e) {
+            validator.validate(e);
+        }
+
         mainView.getTableContractor().setItems(null);
         contractorView.fillTableData();
+        ((Node)(event.getSource())).getScene().getWindow().hide();
+
     }
     @FXML
     Button b_save;
     @Autowired
     ContractorView contractorView;
-    public void cancel(){
+    public void cancel(ActionEvent event){
+        ((Node)(event.getSource())).getScene().getWindow().hide();
 
     }
-    boolean czyEdit;
-    private StringProperty firstNameString = new SimpleStringProperty();
-    private StringProperty lastNameString = new SimpleStringProperty();
-
-    public void cos(String firstName, String lastName) throws IOException {
-            firstNameString.set(firstName);
-            lastNameString.set(lastName);
-        createView();
-        System.out.println("-----------" + mainView.isEdit());
-        if (mainView.isEdit())
-        {
-            System.out.println("edit true");
-            czyEdit=true;
-        }
-        else
-        {czyEdit=false;}
 
 
 
-
-
-
-
-    }
 @Autowired
 MainView mainView;
 
@@ -155,6 +160,8 @@ MainView mainView;
                             TypeOfNip.values()
                     );
             c_type.setItems(optionsModels);
+
+
             String sql3 = "SELECT * FROM BRANCH ";
             SQLQuery query3 = session2.createSQLQuery(sql3);
             query3.addEntity(BranchEntity.class);
@@ -173,7 +180,5 @@ MainView mainView;
 
     }
 
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-    }
+
 }

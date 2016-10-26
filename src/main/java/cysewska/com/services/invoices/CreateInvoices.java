@@ -12,9 +12,11 @@ import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+import java.io.*;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.net.URL;
+import java.net.URLConnection;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -108,8 +110,13 @@ public class CreateInvoices {
         paragraph2.setSpacingBefore(50);
         document.add(paragraph2);
     }
-
-    private void addTableWithProducts(String tabPosition, String total, String tabName, String tabQuantity, String tabTotal, Document document) throws DocumentException {
+    public static double round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+        BigDecimal bd = new BigDecimal(value);
+        bd = bd.setScale(places, RoundingMode.HALF_UP);
+        return bd.doubleValue();
+    }
+    private void addTableWithProducts(String tabPosition, String total, String tabName, String tabQuantity, String tabTotal, Document document) throws DocumentException, IOException {
 
         PdfPTable tableWithProducts = new PdfPTable(4);
         tableWithProducts.setWidthPercentage(90);
@@ -118,6 +125,59 @@ public class CreateInvoices {
         tableWithProducts.addCell(addCellWithBorder("" + tabName, PdfPCell.ALIGN_LEFT, FontFactory.getFont(FontFactory.HELVETICA, 11, Font.BOLD)));
         tableWithProducts.addCell(addCellWithBorder("" + tabQuantity, PdfPCell.ALIGN_LEFT, FontFactory.getFont(FontFactory.HELVETICA, 11, Font.BOLD)));
         tableWithProducts.addCell(addCellWithBorder("" + tabTotal, PdfPCell.ALIGN_LEFT, FontFactory.getFont(FontFactory.HELVETICA, 11, Font.BOLD)));
+        Double d=null;
+        String unit="";
+        System.out.println(invoiceEntity.getLanguage().toString());
+        switch (invoiceEntity.getLanguage().toString())
+        {
+            case "POLSKI": {
+                d=1d;
+                unit = " PLN";
+                break;
+            }
+            case "ANGIELSKI": {
+                URL url = new URL("http://www.waluty.pl/currency/eur/");
+                URLConnection con = url.openConnection();
+                InputStream is =con.getInputStream();
+                BufferedReader br = new BufferedReader(new InputStreamReader(is));
+                String line = null;
+                String temp="";
+                while ((line = br.readLine()) != null) {
+                    if (line.contains("PLN") ) {
+
+                        int p = line.indexOf("EUR")+6;
+                        int ll = line.indexOf("PLN")-1;
+                        String a = line.substring(p,ll );
+                        d  = Double.parseDouble(a);
+                        System.out.println(a + "   + "  + d) ;
+                        unit = " EUR";
+                        break;
+                    }
+                }
+                break;
+            }
+            case "NORWERSKI": {
+                URL url = new URL("http://www.waluty.pl/currency/nok/");
+                URLConnection con = url.openConnection();
+                InputStream is =con.getInputStream();
+                BufferedReader br = new BufferedReader(new InputStreamReader(is));
+                String line = null;
+                String temp="";
+                while ((line = br.readLine()) != null) {
+                    if (line.contains("PLN") ) {
+
+                        String a = line.substring(line.indexOf("NOK")+6, line.indexOf("PLN")-1);
+                        d  = Double.parseDouble(a);
+                        unit = " NOK";
+                        break;
+                    }
+                }
+                break;
+            }
+        }
+
+
+
 
 
         double totalValue = 0;
@@ -126,11 +186,12 @@ public class CreateInvoices {
             //  table.addCell(getCell(ownerData.get(4), PdfPCell.ALIGN_LEFT,   FontFactory.getFont(FontFactory.HELVETICA, 10, Font.NORMAL)));
             System.out.println(count + " " + orderClothEntity.getQuantity() + "  " + orderClothEntity.getClothEntity().getPricePl() * orderClothEntity.getQuantity());
             tableWithProducts.addCell(addCellWithBorder("" + count, PdfPCell.ALIGN_LEFT, FontFactory.getFont(FontFactory.HELVETICA, 11, Font.NORMAL)));
-            tableWithProducts.addCell(addCellWithBorder(orderClothEntity.getClothEntity().getModelEntity().getModel() + count, PdfPCell.ALIGN_CENTER, FontFactory.getFont(FontFactory.HELVETICA, 11, Font.NORMAL)));
+            tableWithProducts.addCell(addCellWithBorder(orderClothEntity.getClothEntity().getClothNamePL() , PdfPCell.ALIGN_CENTER, FontFactory.getFont(FontFactory.HELVETICA, 11, Font.NORMAL)));
             tableWithProducts.addCell(addCellWithBorder("" + orderClothEntity.getQuantity(), PdfPCell.ALIGN_CENTER, FontFactory.getFont(FontFactory.HELVETICA, 11, Font.NORMAL)));
-            tableWithProducts.addCell(addCellWithBorder("" + orderClothEntity.getClothEntity().getPricePl() * orderClothEntity.getQuantity(), PdfPCell.ALIGN_CENTER, FontFactory.getFont(FontFactory.HELVETICA, 11, Font.NORMAL)));
+            tableWithProducts.addCell(addCellWithBorder("" + round(orderClothEntity.getClothEntity().getPricePl() *d* orderClothEntity.getQuantity(),2)+unit, PdfPCell.ALIGN_CENTER, FontFactory.getFont(FontFactory.HELVETICA, 11, Font.NORMAL)));
 
-            totalValue = totalValue + (orderClothEntity.getClothEntity().getPricePl() * orderClothEntity.getQuantity());
+            totalValue = totalValue + (orderClothEntity.getClothEntity().getPricePl() * orderClothEntity.getQuantity() *d);
+            totalValue = round(totalValue,2);
             count++;
         }
 
@@ -138,7 +199,7 @@ public class CreateInvoices {
         tableWithProducts.addCell(getCell("", PdfPCell.ALIGN_CENTER, FontFactory.getFont(FontFactory.HELVETICA, 11, Font.NORMAL)));
         tableWithProducts.addCell(getCell(total, PdfPCell.ALIGN_CENTER, FontFactory.getFont(FontFactory.HELVETICA, 11, Font.BOLD)));
 
-        tableWithProducts.addCell(addCellWithBorder("" + totalValue, PdfPCell.ALIGN_CENTER, FontFactory.getFont(FontFactory.HELVETICA, 11, Font.BOLD)));
+        tableWithProducts.addCell(addCellWithBorder("" + totalValue + unit, PdfPCell.ALIGN_CENTER, FontFactory.getFont(FontFactory.HELVETICA, 11, Font.BOLD)));
 
 
         document.add(tableWithProducts);
@@ -177,7 +238,7 @@ public class CreateInvoices {
         document.add(paragraph5);
     }
 
-    public void createInvoice() throws DocumentException, FileNotFoundException {
+    public void createInvoice() throws DocumentException, IOException {
         invoiceEntity = invoiceRepository.findAll().stream().max(Comparator.comparing(InvoiceEntity::getId)).get();
         List<String> ownerData = Arrays.asList("EGEN spółka z o.o.", "NIEKŁONICE 23", "76-024 ŚWIESZYNO",
                 "POLAND", "BANK PEKAO S.A I/Oddział Koszalin", "SWIFT - PKOPPLPW", "PL 342 424 34 23234 34234342");
@@ -185,7 +246,7 @@ public class CreateInvoices {
         PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(findFile()));
         document.open();
         createContractorTable(document, ownerData);
-String total = null;
+        String total = null;
         String tittleDocument;
         String tabName = null;
         String tabQuantity = null;
@@ -208,10 +269,10 @@ String total = null;
             }
             if (invoiceEntity.getQuantityOfPallet()>=2 || invoiceEntity.getQuantityOfPallet()<=4) {
 
-                palets = " palety";
+                palets = "palety";
             }
             if (invoiceEntity.getQuantityOfPallet()>=5 ) {
-                palets = " palet";
+                palets = "palet";
             }
 
 
@@ -229,7 +290,7 @@ String total = null;
                 palets = "palet";
             }
             else {
-                palets = " palets";
+                palets = "palets";
             }
         }
         addTittle(document, tittleDocument);

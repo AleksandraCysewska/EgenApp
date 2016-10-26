@@ -6,7 +6,6 @@ import cysewska.com.models.entities.InvoiceEntity;
 import cysewska.com.models.entities.ModelEntity;
 import cysewska.com.models.entities.OrderEntity;
 import cysewska.com.models.enums.ELanguage;
-import cysewska.com.models.enums.Model;
 import cysewska.com.models.enums.TypeOfPayment;
 import cysewska.com.repositories.InvoiceRepository;
 import cysewska.com.repositories.OrderRepository;
@@ -72,7 +71,7 @@ public class AddInvoice implements Initializable {
     ComboBox c_payment;
     @Autowired
     CreateInvoices createInvoices;
-    public void save() throws FileNotFoundException, DocumentException {
+    public void save() throws IOException, DocumentException {
 
 
         SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
@@ -109,11 +108,12 @@ public class AddInvoice implements Initializable {
 
         mainView.getTableInvoice().setItems(null);
         invoiceViewImp.fillTableData();
-
         createInvoices.createInvoice();
+
+
     }
-@Autowired
-MainView mainView;
+    @Autowired
+    MainView mainView;
     @Autowired
     InvoiceViewImp invoiceViewImp;
     public void cancel() {

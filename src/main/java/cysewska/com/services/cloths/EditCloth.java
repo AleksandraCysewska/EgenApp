@@ -3,7 +3,6 @@ package cysewska.com.services.cloths;
 import cysewska.com.controllers.MainView;
 import cysewska.com.models.dto.TextileClothDTO;
 import cysewska.com.models.entities.*;
-import cysewska.com.models.enums.Model;
 import cysewska.com.services.contractors.AddContractorWindow;
 import cysewska.com.services.contractors.EditContractor;
 import javafx.collections.FXCollections;
@@ -100,29 +99,38 @@ public class EditCloth implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        ObservableList<Model> optionsModels =
-                FXCollections.observableArrayList(
-                        Model.values()
-                );
-        c_model.setItems(optionsModels);
-
         SessionFactory sessionFactory2 = new Configuration().configure().buildSessionFactory();
         Session session2 = sessionFactory2.openSession();
         session2.beginTransaction();
+
+        String models = "SELECT * FROM MODELS";
+        SQLQuery modelsSQL = session2.createSQLQuery(models);
+        modelsSQL.addEntity(ModelEntity.class);
+        List<ModelEntity> list = modelsSQL.list();
+
+        List<String> modelsList = new ArrayList<>();
+        for (ModelEntity modelEntity : list) {
+            modelsList.add(modelEntity.getModel());
+        }
+        ObservableList<String> optionsModels =
+                FXCollections.observableArrayList(
+                        modelsList
+                );
+        c_model.setItems(optionsModels);
 
         String dep = "SELECT * FROM CLOTH WHERE CLOTH_NAME_PL = :PARAM";
         SQLQuery depQuery = session2.createSQLQuery(dep);
         depQuery.setParameter("PARAM", mainView.getSelected());
         depQuery.addEntity(ClothEntity.class);
-        list = depQuery.list();
+        this.list = depQuery.list();
 
 
-        t_nameENG.setText(list.get(0).getClothNameENG());
-        t_nameNO.setText(list.get(0).getClothNameNO());
-        t_price.setText(list.get(0).getPricePl().toString());
-        t_name.setText(list.get(0).getClothNamePL());
-        c_model.setValue(list.get(0).getModelEntity().getModel());
-        Set<Textile_Cloth_Entity> textile_cloths = list.get(0).getTextile_cloths();
+        t_nameENG.setText(this.list.get(0).getClothNameENG());
+        t_nameNO.setText(this.list.get(0).getClothNameNO());
+        t_price.setText(this.list.get(0).getPricePl().toString());
+        t_name.setText(this.list.get(0).getClothNamePL());
+        c_model.setValue(this.list.get(0).getModelEntity().getModel());
+        Set<Textile_Cloth_Entity> textile_cloths = this.list.get(0).getTextile_cloths();
         for (Textile_Cloth_Entity textile_cloth : textile_cloths) {
 
             listViewitems.add(new TextileClothDTO(textile_cloth.getClothEntity().getClothNamePL(),
@@ -165,7 +173,7 @@ public class EditCloth implements Initializable {
             Transaction tx = null;
             try {
                 tx = session.beginTransaction();
-                clothEntity = (ClothEntity) session.get(ClothEntity.class, list.get(0).getId());
+                clothEntity = (ClothEntity) session.get(ClothEntity.class, this.list.get(0).getId());
                 clothEntity.setClothNameENG(t_nameENG.getText());
                 clothEntity.setClothNameNO(t_nameNO.getText());
                 clothEntity.setClothNamePL(t_name.getText());

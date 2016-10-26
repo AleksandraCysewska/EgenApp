@@ -4,7 +4,6 @@ import cysewska.com.controllers.MainView;
 import cysewska.com.models.dto.ClothDTO;
 import cysewska.com.models.dto.TextileClothDTO;
 import cysewska.com.models.entities.*;
-import cysewska.com.models.enums.Model;
 import cysewska.com.models.enums.TypeOfNip;
 import cysewska.com.repositories.ClothRepository;
 import cysewska.com.repositories.ModelRepository;
@@ -114,15 +113,29 @@ public class AddCloth implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        ObservableList<Model> optionsModels =
-                FXCollections.observableArrayList(
-                        Model.values()
-                );
-        c_model.setItems(optionsModels);
+
 
         SessionFactory sessionFactory2 = new Configuration().configure().buildSessionFactory();
         Session session2 = sessionFactory2.openSession();
         session2.beginTransaction();
+
+        String models = "SELECT * FROM MODELS";
+        SQLQuery modelsSQL = session2.createSQLQuery(models);
+        modelsSQL.addEntity(ModelEntity.class);
+        List<ModelEntity> list = modelsSQL.list();
+        List<String> modelsList = new ArrayList<>();
+        for (ModelEntity modelEntity : list) {
+            modelsList.add(modelEntity.getModel());
+        }
+        ObservableList<String> optionsModels =
+                FXCollections.observableArrayList(
+                        modelsList
+                );
+        c_model.setItems(optionsModels);
+
+
+
+
 
         String sql3 = "SELECT * FROM TEXTILE ";
         SQLQuery query3 = session2.createSQLQuery(sql3);

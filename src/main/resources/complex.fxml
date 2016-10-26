@@ -21,44 +21,47 @@
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#addContractor" text="Dodaj kontrahenta" fx:id="mi_addContractor" />
                 <MenuItem mnemonicParsing="false" onAction="#editContractor" text="Edytuj kontrahenta" />
-                <MenuItem mnemonicParsing="false" text="Dodaj filię" />
+                <MenuItem mnemonicParsing="false" onAction="#addBranch" text="Dodaj filię" />
+                <MenuItem mnemonicParsing="false" onAction="#editBranch" text="Edytuj filię" />
               </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Zamówienia" fx:id="m_order">
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#addOrder" text="Dodaj zamówienie" fx:id="m_add_order" />
                 <MenuItem mnemonicParsing="false" onAction="#editOrder" text="Edytuj zamówienie" />
-                <MenuItem onAction="#showOrder" mnemonicParsing="false" text="Pokaż zamówienie" />
-                <MenuItem mnemonicParsing="false" text="Drukuj zamówienie" />
+                <MenuItem mnemonicParsing="false" onAction="#showOrder" text="Pokaż zamówienie" />
               </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Towary" fx:id="m_cloth">
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#add_cloth" text="Dodaj towar" fx:id="add_cloth" />
                 <MenuItem mnemonicParsing="false" onAction="#editCloth" text="Edytuj towar" />
-                <MenuItem onAction="#showCloth" mnemonicParsing="false" text="Pokaż towar" />
+                <MenuItem mnemonicParsing="false" onAction="#showCloth" text="Pokaż towar" />
+                <MenuItem mnemonicParsing="false" onAction="#addModel" text="Dodaj model" />
+                <MenuItem mnemonicParsing="false" onAction="#editModel" text="Edytuj model" />
               </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Faktury" fx:id="m_invoice">
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#addInvoice" text="Generuj fakturę" />
                 <MenuItem mnemonicParsing="false" onAction="#editInvoice" text="Edytuj fakturę" />
-                <MenuItem onAction="#showInvoice" mnemonicParsing="false"  text="Pokaż fakturę" />
-                <MenuItem mnemonicParsing="false" text="Drukuj fakturę" />
+                <MenuItem mnemonicParsing="false" onAction="#showInvoice" text="Pokaż fakturę" />
               </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Tkaniny" fx:id="m_textile">
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#addTextile" text="Dodaj tkaninę" />
+                <MenuItem mnemonicParsing="false" onAction="#generateRaport" text="Generuj raport" />
                 <MenuItem mnemonicParsing="false" onAction="#editTextile" text="Edytuj tkaninę" />
-                <MenuItem mnemonicParsing="false" onAction="#editTextile" text="Pokaż fakturę" />
+                <MenuItem mnemonicParsing="false" onAction="#editTextile" text="Pokaż tkaninę" />
+                <MenuItem mnemonicParsing="false" onAction="#addPW" text="Dodaj przyjęcie magazynowe" />
               </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Pomoc" fx:id="m_help">
               <items>
                 <MenuItem mnemonicParsing="false" text="Okno pomocy" />
                 <MenuItem mnemonicParsing="false" text="O autorze" />
-                <MenuItem mnemonicParsing="false" text="Zgłoś błąd" />
+                <MenuItem mnemonicParsing="false" onAction="#sendError" text="Zgłoś błąd" />
               </items>
             </Menu>
           </menus>

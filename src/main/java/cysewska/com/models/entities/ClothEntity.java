@@ -1,6 +1,7 @@
 package cysewska.com.models.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.Arrays;
 import java.util.Set;
 
@@ -12,10 +13,10 @@ import java.util.Set;
 @Table(name = "CLOTH")
 public class ClothEntity {
     @Id
-   // @GeneratedValue(strategy = GenerationType.TABLE)
     @Column(name = "CLOTH_ID")
     Long id;
-    @Column(name = "CLOTH_NAME_PL")
+    @Column(name = "CLOTH_NAME_PL", unique = true)
+    @Size(min =3, message = "Nazwa polska musi być unikalna, ")
     String clothNamePL;
     @Column(name = "CLOTH_NAME_NO")
     String clothNameNO;

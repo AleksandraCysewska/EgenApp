@@ -1,9 +1,11 @@
 package cysewska.com.models.entities;
 
-import cysewska.com.models.enums.TypeOfNip;
 import lombok.NonNull;
+import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 /**
@@ -16,25 +18,33 @@ import java.util.Set;
 public class DepartmentEntity {
     @Id
     @NonNull
-   // @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "DEPARTMENT_ID")
     Integer id;
-    @Column(name = "DEPARTMENT_NAME")
+    @Column(name = "DEPARTMENT_NAME", unique = true)
+    @NonNull
+    @Size(min=1, message = "Nazwa musi być unikalna i zawierać minimum jeden znak.")
     String name;
     @Column(name = "TYPE_OF_NIP")
     String typeOfNip;
-    @Column(name = "NIP")
+    @Pattern(regexp = "^[0-9]{1,45}", message = "NIP musi zawierać same cyfry do maksymalnej długości 45 znaków.")
+    @Column(name = "NIP", unique = true)
     String nip;
     @Column(name = "COUNTRY")
+    @Pattern(regexp = ".{3,45}", message = "Kraj musi zawierać co najmniej trzy znaki.")
     String country;
+    @Size(min=2, message="Miasto musi zawierać co najmniej dwa znaki.")
     @Column(name = "CITY")
     String city;
     @Column(name = "ADDRESS")
+    @Size(min=2, message="Adres musi zawierać co najmniej dwa znaki.")
     String address;
     @Column(name = "ZIP")
+    @Pattern(regexp = "[0-9]{2}-[0-9]{3}", message = "Kod pocztowy musi mieć postać **-***, zawierający same cyfry/")
     String zip;
+    @Email(message = "Email musi być prawidłowy.")
     @Column(name = "EMAIL")
     String email;
+    @Pattern(regexp = "^[0-9]{3,45}", message = "Telefon musi zawierać co najmniej trzy cyfry.")
     @Column(name = "TELEPHONE")
     String telephone;
 
