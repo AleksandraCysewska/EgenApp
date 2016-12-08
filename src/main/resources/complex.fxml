@@ -1,106 +1,148 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.effect.*?>
 <?import java.lang.*?>
+<?import javafx.collections.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
 
-<SplitPane dividerPositions="0.10050251256281408" orientation="VERTICAL" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cysewska.com.views.contractors.ContractorAction">
-    <items>
-        <AnchorPane maxHeight="25.0" minHeight="25.0" minWidth="0.0" prefHeight="25.0" prefWidth="598.0">
-            <children>
-                <MenuBar layoutX="14.0" layoutY="6.0" prefHeight="37.0" prefWidth="598.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                    <menus>
-                        <Menu mnemonicParsing="false" text="File">
-                            <items>
-                                <MenuItem mnemonicParsing="false" text="Close" />
-                            </items>
-                        </Menu>
-                        <Menu mnemonicParsing="false" text="Edit">
-                            <items>
-                                <MenuItem mnemonicParsing="false" text="Delete" />
-                            </items>
-                        </Menu>
-                        <Menu mnemonicParsing="false" text="Help">
-                            <items>
-                                <MenuItem mnemonicParsing="false" text="About" />
-                            </items>
-                        </Menu>
-                    </menus>
-                </MenuBar>
-            </children></AnchorPane>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-            <children>
-                <SplitPane dividerPositions="0.18696883852691218" layoutX="110.0" layoutY="25.0" orientation="VERTICAL" prefHeight="355.0" prefWidth="598.0" snapToPixel="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                    <items>
-                        <AnchorPane prefHeight="50.0" prefWidth="160.0">
-                            <children>
-                                <Label layoutX="29.0" layoutY="23.0" text="Label" />
-                                <Button layoutX="232.0" layoutY="19.0" mnemonicParsing="false" onAction="#button1" text="Button" />
-                                <TextField layoutX="68.0" layoutY="19.0" />
-                            </children>
+<SplitPane fx:id="okienko" dividerPositions="0.07035175879396985" maxWidth="600.0" orientation="VERTICAL" prefHeight="400.0" prefWidth="-1.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="cysewska.com.controllers.MainView">
+  <items>
+    <AnchorPane maxHeight="25.0" minHeight="25.0" minWidth="0.0" prefHeight="25.0" prefWidth="598.0">
+      <children>
+        <MenuBar prefHeight="37.0" prefWidth="598.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+          <menus>
+            <Menu mnemonicParsing="false" text="Plik" fx:id="m_file">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Wyjście" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Kontrahenci" fx:id="m_conctractor">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#addContractor" text="Dodaj kontrahenta" fx:id="mi_addContractor" />
+                <MenuItem mnemonicParsing="false" onAction="#editContractor" text="Edytuj kontrahenta" />
+                <MenuItem mnemonicParsing="false" onAction="#addBranch" text="Dodaj filię" />
+                <MenuItem mnemonicParsing="false" onAction="#editBranch" text="Edytuj filię" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Zamówienia" fx:id="m_order">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#addOrder" text="Dodaj zamówienie" fx:id="m_add_order" />
+                <MenuItem mnemonicParsing="false" onAction="#editOrder" text="Edytuj zamówienie" />
+                <MenuItem mnemonicParsing="false" onAction="#showOrder" text="Pokaż zamówienie" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Towary" fx:id="m_cloth">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#add_cloth" text="Dodaj towar" fx:id="add_cloth" />
+                <MenuItem mnemonicParsing="false" onAction="#editCloth" text="Edytuj towar" />
+                <MenuItem mnemonicParsing="false" onAction="#showCloth" text="Pokaż towar" />
+                <MenuItem mnemonicParsing="false" onAction="#addModel" text="Dodaj model" />
+                <MenuItem mnemonicParsing="false" onAction="#editModel" text="Edytuj model" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Faktury" fx:id="m_invoice">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#addInvoice" text="Generuj fakturę" />
+                <MenuItem mnemonicParsing="false" onAction="#editInvoice" text="Edytuj fakturę" />
+                <MenuItem mnemonicParsing="false" onAction="#showInvoice" text="Pokaż fakturę" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Tkaniny" fx:id="m_textile">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#addTextile" text="Dodaj tkaninę" />
+                <MenuItem mnemonicParsing="false" onAction="#generateRaport" text="Generuj raport" />
+                <MenuItem mnemonicParsing="false" onAction="#editTextile" text="Edytuj tkaninę" />
+                <MenuItem mnemonicParsing="false" onAction="#editTextile" text="Pokaż tkaninę" />
+                <MenuItem mnemonicParsing="false" onAction="#addPW" text="Dodaj przyjęcie magazynowe" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Pomoc" fx:id="m_help">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Okno pomocy" />
+                <MenuItem mnemonicParsing="false" text="O autorze" />
+                <MenuItem mnemonicParsing="false" onAction="#sendError" text="Zgłoś błąd" />
+              </items>
+            </Menu>
+          </menus>
+        </MenuBar>
+      </children>
+    </AnchorPane>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+      <children>
+        <SplitPane dividerPositions="0.14520547945205478" orientation="VERTICAL" prefHeight="355.0" prefWidth="598.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+          <items>
+            <AnchorPane disable="false" maxHeight="50.0" prefHeight="50.0" prefWidth="160.0">
+              <children>
+                <Label layoutX="39.0" layoutY="17.0" text="Wyszukiwanie" />
+                <TextField fx:id="t_search" layoutX="271.0" layoutY="14.0" />
+                <ComboBox fx:id="c_search" layoutX="123.0" layoutY="15.0" prefHeight="21.0" prefWidth="131.0">
+                  <items>
+                    <FXCollections fx:factory="observableArrayList">
+                      <String fx:value="Item 1" />
+                      <String fx:value="Item 2" />
+                      <String fx:value="Item 3" />
+                    </FXCollections>
+                  </items>
+                </ComboBox>
+              </children>
+            </AnchorPane>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+              <children>
+                <TabPane fx:id="tabbedPane" prefHeight="247.0" prefWidth="596.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <tabs>
+                    <Tab text="Kontrahenci">
+                      <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                          <children>
+                            <TableView fx:id="table_contractor" editable="false" prefHeight="265.0" prefWidth="596.0" visible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                          </children>
                         </AnchorPane>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                            <children>
-                                <TabPane prefHeight="247.0" prefWidth="596.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                    <tabs>
-                                        <Tab text="Untitled Tab 1">
-                                            <content>
-                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                                    <children>
-                                                        <TableView fx:id="table_contractor" prefHeight="265.0" prefWidth="596.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                                                    </children>
-                                                </AnchorPane>
-                                            </content>
-                                        </Tab>
-                                        <Tab text="Untitled Tab 2">
-                                            <content>
-                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                                    <children>
-                                                        <TableView layoutX="23.0" layoutY="14.0" prefHeight="265.0" prefWidth="596.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                            <columns>
-                                                                <TableColumn prefWidth="75.0" text="C1" />
-                                                                <TableColumn prefWidth="75.0" text="C2" />
-                                                            </columns>
-                                                        </TableView>
-                                                    </children>
-                                                </AnchorPane>
-                                            </content>
-                                        </Tab>
-                                        <Tab text="Untitled Tab 1">
-                                            <content>
-                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                                    <children>
-                                                        <TableView prefHeight="265.0" prefWidth="596.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                            <columns>
-                                                                <TableColumn prefWidth="75.0" text="C1" />
-                                                                <TableColumn prefWidth="75.0" text="C2" />
-                                                            </columns>
-                                                        </TableView>
-                                                    </children>
-                                                </AnchorPane>
-                                            </content>
-                                        </Tab>
-                                        <Tab text="Untitled Tab 1">
-                                            <content>
-                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                                    <children>
-                                                        <TableView prefHeight="265.0" prefWidth="596.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                            <columns>
-                                                                <TableColumn prefWidth="75.0" text="C1" />
-                                                                <TableColumn prefWidth="75.0" text="C2" />
-                                                            </columns>
-                                                        </TableView>
-                                                    </children>
-                                                </AnchorPane>
-                                            </content>
-                                        </Tab>
-                                    </tabs>
-                                </TabPane>
-                            </children>
+                      </content>
+                    </Tab>
+                    <Tab text="Zamówienia">
+                      <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                          <children>
+                            <TableView fx:id="table_order" prefHeight="265.0" prefWidth="596.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                          </children>
                         </AnchorPane>
-                    </items>
-                </SplitPane>
-            </children></AnchorPane>
-    </items>
+                      </content>
+                    </Tab>
+                    <Tab text="Towary">
+                      <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                          <children>
+                            <TableView fx:id="table_cloth" prefHeight="265.0" prefWidth="596.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                          </children>
+                        </AnchorPane>
+                      </content>
+                    </Tab>
+                    <Tab text="Faktury">
+                      <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                          <children>
+                            <TableView fx:id="table_invoice" prefHeight="265.0" prefWidth="596.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                          </children>
+                        </AnchorPane>
+                      </content>
+                    </Tab>
+                    <Tab text="Tkaniny">
+                      <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                          <children>
+                            <TableView fx:id="table_textile" prefHeight="265.0" prefWidth="596.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                          </children>
+                        </AnchorPane>
+                      </content>
+                    </Tab>
+                  </tabs>
+                </TabPane>
+              </children>
+            </AnchorPane>
+          </items>
+        </SplitPane>
+      </children>
+    </AnchorPane>
+  </items>
 </SplitPane>

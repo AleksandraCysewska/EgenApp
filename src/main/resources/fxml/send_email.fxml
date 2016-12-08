@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+  <children>
+    <Button layoutX="378.0" layoutY="312.0" mnemonicParsing="false" onAction="#send" prefWidth="146.0" text="Wyślij" />
+    <TextArea fx:id="t_statement" layoutX="138.0" layoutY="58.0" prefHeight="217.0" prefWidth="386.0" wrapText="true" />
+    <Label layoutX="61.0" layoutY="58.0" text="Treść zgłoszenia" translateX="-30.0" />
+  </children>
+</AnchorPane>

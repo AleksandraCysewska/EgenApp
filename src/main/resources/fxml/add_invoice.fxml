@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+  <children>
+    <GridPane fx:id="gridMain" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <children>
+        <Label prefWidth="120.0" text="Numer zamówienia" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+          <font>
+            <Font size="12.0" fx:id="x1" />
+          </font>
+        </Label>
+        <Label font="$x1" prefWidth="120.0" text="Język faktury" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+        <Label font="$x1" prefWidth="120.0" text="Data wystawienia" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+        <Label font="$x1" prefWidth="120.0" text="Rodzaj płatności" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+        <Label font="$x1" prefWidth="120.0" text="Termin płatności" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+        <Label font="$x1" prefWidth="120.0" text="Waga netto" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
+        <Label font="$x1" prefWidth="120.0" text="Waga brutto" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
+        <Label font="$x1" prefWidth="120.0" text="Ilość palet" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
+        <DatePicker fx:id="t_createDate" prefWidth="-1.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+        <DatePicker fx:id="t_term" prefWidth="-1.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+        <TextField fx:id="t_netto" prefWidth="208.9998779296875" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+        <TextField fx:id="t_brutto" prefWidth="-1.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+        <TextField fx:id="t_quantity" prefWidth="-1.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+        <ComboBox fx:id="c_order" prefHeight="-1.0" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+          <items>
+            <FXCollections fx:factory="observableArrayList">
+              <String fx:value="Item 1" />
+              <String fx:value="Item 2" />
+              <String fx:value="Item 3" />
+            </FXCollections>
+          </items>
+        </ComboBox>
+        <ComboBox fx:id="c_language" prefHeight="-1.0" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+          <items>
+            <FXCollections fx:factory="observableArrayList">
+              <String fx:value="Item 1" />
+              <String fx:value="Item 2" />
+              <String fx:value="Item 3" />
+            </FXCollections>
+          </items>
+        </ComboBox>
+        <Button mnemonicParsing="false" fx:id="cancel" onAction="#cancel" prefHeight="25.0" prefWidth="120.0" text="Anuluj" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="10" />
+        <Button mnemonicParsing="false" fx:id="save" onAction="#save" prefHeight="25.0" prefWidth="120.0" text="Generuj fakturę" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="10" />
+        <ComboBox fx:id="c_payment" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+          <items>
+            <FXCollections fx:factory="observableArrayList">
+              <String fx:value="Item 1" />
+              <String fx:value="Item 2" />
+              <String fx:value="Item 3" />
+            </FXCollections>
+          </items>
+        </ComboBox>
+      </children>
+      <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="271.0" minWidth="10.0" prefWidth="240.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="272.0" minWidth="10.0" prefWidth="209.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="199.0" minWidth="10.0" prefWidth="151.0" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      </rowConstraints>
+    </GridPane>
+  </children>
+</AnchorPane>

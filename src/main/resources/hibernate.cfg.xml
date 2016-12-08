@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration SYSTEM
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.dialect">
+            cysewska.com.configuration.SQLiteDialect
+        </property>
+        <property name="hibernate.connection.driver_class">
+            org.sqlite.JDBC
+        </property>
+
+        <!-- Assume test is the database name -->
+        <property name="hibernate.connection.url">
+            jdbc:sqlite:mydb.db
+        </property>
+        <property name="hibernate.connection.username">
+
+        </property>
+        <property name="hibernate.current_session_context_class">thread</property>
+        <property name="hibernate.connection.password">
+
+        </property>
+
+        <!-- List of XML mapping files -->
+
+        <mapping class="cysewska.com.models.entities.ModelEntity" />
+        <mapping class="cysewska.com.models.entities.ClothEntity" />
+        <mapping class="cysewska.com.models.entities.OrderClothEntity" />
+        <mapping class="cysewska.com.models.entities.OrderEntity" />
+        <mapping class="cysewska.com.models.entities.DepartmentEntity" />
+        <mapping class="cysewska.com.models.entities.BranchEntity" />
+        <mapping class="cysewska.com.models.entities.InvoiceEntity" />
+        <mapping class="cysewska.com.models.entities.Textile_Cloth_Entity" />
+        <mapping class="cysewska.com.models.entities.TextileEntity" />
+        <mapping class="cysewska.com.models.entities.UsersEntity" />
+    </session-factory>
+</hibernate-configuration>
