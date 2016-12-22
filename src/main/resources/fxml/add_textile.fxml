@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
+<?import com.jfoenix.controls.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.collections.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
+<?import com.jfoenix.controls.JFXTextField?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@bootstrap.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
   <children>
     <GridPane prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="2.0">
       <children>
-        <Label text="Nazwa" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-        <Label text="Kolor" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
-        <Label text="Liczba" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
-        <Label text="Grubość" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
-        <TextField fx:id="t_name" prefWidth="206.9998779296875" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-        <ComboBox fx:id="c_color" prefWidth="207.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+        <Label text="Nazwa tkaniny" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+        <Label text="Kolor tkaniny" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+        <Label text="Ilość tkaniny" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+        <Label text="Grubość tkaniny" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+        <JFXTextField fx:id="t_name" focusColor="#f7f7f700" labelFloat="true" prefWidth="206.9998779296875" promptText="Nazwa tkaniny" unFocusColor="#f0f0f000" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <ComboBox fx:id="c_color" prefWidth="207.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
           <items>
             <FXCollections fx:factory="observableArrayList">
               <String fx:value="Item 1" />
@@ -25,20 +28,17 @@
             </FXCollections>
           </items>
         </ComboBox>
-        <TextField fx:id="t_quantity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-        <TextField fx:id="t_thickness" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-        <Button mnemonicParsing="false" onAction="#save" prefWidth="120.0" text="Zapisz" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="7" />
-        <Button mnemonicParsing="false" prefWidth="120.0" text="Anuluj" translateX="30.0" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
+        <JFXTextField fx:id="t_quantity" focusColor="#fefeff" prefWidth="200.0" promptText="Ilość tkaniny" unFocusColor="#f7f5f529" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+        <JFXTextField fx:id="t_thickness" focusColor="#e3e4e50a" prefWidth="200.0" promptText="Grubośc tkaniny" unFocusColor="#f0ebeb0b" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+        <Button fx:id="b_save" mnemonicParsing="false" onAction="#save" prefWidth="120.0" styleClass="success" text="Zapisz" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="6" />
+        <Button mnemonicParsing="false" prefWidth="120.0"  onAction="#cancel" styleClass="danger" text="Anuluj" translateX="30.0" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
       </children>
       <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="259.0" minWidth="10.0" prefWidth="259.0" />
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="266.0" minWidth="10.0" prefWidth="207.0" />
+        <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="266.0" minWidth="10.0" prefWidth="207.0" />
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="199.0" minWidth="10.0" prefWidth="134.0" />
       </columnConstraints>
       <rowConstraints>
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />

@@ -1,13 +1,17 @@
 package cysewska.com.services.contractors;
 
+import com.jfoenix.controls.JFXTextField;
 import cysewska.com.controllers.MainView;
 import cysewska.com.models.entities.BranchEntity;
 import cysewska.com.models.entities.DepartmentEntity;
 import cysewska.com.models.enums.TypeOfNip;
-import cysewska.com.services.validators.Validator;
-import javafx.application.Application;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import cysewska.com.repositories.BranchRepository;
+import cysewska.com.repositories.DepartmentRepository;
+import cysewska.com.services.validators.services.EmailValidator;
+import cysewska.com.services.validators.services.IntegerValidator;
+import cysewska.com.services.validators.services.StringValidator;
+import cysewska.com.services.validators.ValidatorController;
+import cysewska.com.services.validators.services.ZipValidator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,19 +22,12 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import org.hibernate.SQLQuery;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
-import javax.validation.Valid;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
@@ -41,40 +38,54 @@ import java.util.stream.Collectors;
  */
 @Component
 public class AddContractorWindow implements Initializable {
+    private final Logger logger = Logger.getLogger(this.getClass());
 
     private AnchorPane root;
-  @FXML
-  TextField t_department;
+    @FXML
+    JFXTextField t_department;
     @FXML
     ComboBox c_branch;
     @FXML
     ComboBox c_type;
     @FXML
-            TextField t_nip;
+    JFXTextField t_nip;
     @FXML
-            TextField t_address;
+    JFXTextField t_address;
     @FXML
-            TextField t_zip;
+    JFXTextField t_zip;
+    @Autowired
+    MainView mainView;
     @FXML
-    TextField t_country;
+    JFXTextField t_country;
     @FXML
-    TextField t_email;
+    JFXTextField t_email;
     @FXML
-            TextField t_telephone;
+    JFXTextField t_telephone;
     @FXML
-    TextField t_city;
-
-    Stage stage ;
+    JFXTextField t_city;
+    @FXML
+    Button b_save;
+    @Autowired
+    ContractorView contractorView;
+    Stage stage;
+    @Autowired
+    ValidatorController validatorController;
+    List<BranchEntity> results3;
 @Autowired
-    Validator validator;
+    DepartmentRepository departmentRepository;
+    public void createView() {
 
-    public void createView() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/crud_contractor.fxml"));
         fxmlLoader.setController(this);
-        root = (AnchorPane)fxmlLoader.load();
+        try {
+            root = (AnchorPane) fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+            logger.error(e.getMessage());
+        }
         stage = new Stage();
         stage.getIcons().add(new Image("shop.png"));
-
+        stage.setResizable(false);
         stage.setTitle("Dodawanie kontrahenta");
         stage.show();
         fxmlLoader.setController(AddContractorWindow.class);
@@ -85,99 +96,91 @@ public class AddContractorWindow implements Initializable {
         stage.centerOnScreen();
         stage.toFront();
     }
-    public DepartmentEntity createDepartment(){
-        SessionFactory sessionFactory2 = new Configuration().configure().buildSessionFactory();
-        Session session2 = sessionFactory2.openSession();
-        session2.beginTransaction();
-        String sql3 = "SELECT * FROM BRANCH ";
-        SQLQuery query3 = session2.createSQLQuery(sql3);
-        query3.addEntity(BranchEntity.class);
-        List<BranchEntity> results3 = query3.list();
 
-        String dep = "SELECT * FROM DEPARTMENT ";
-        SQLQuery depQuery = session2.createSQLQuery(dep);
-        depQuery.addEntity(DepartmentEntity.class);
-        List<DepartmentEntity> departmentEntities = depQuery.list();
-        DepartmentEntity departmentEntity = new DepartmentEntity(
-                departmentEntities.stream().max(Comparator.comparing(DepartmentEntity::getId)).get().getId() + 1,
-                t_department.getText(),
-                c_type.getValue().toString(),
-                t_nip.getText(),
-                t_country.getText(),
-                t_city.getText(),
-                t_address.getText(),
-                t_zip.getText(),
-                t_email.getText(),
-                t_telephone.getText(),
+    public DepartmentEntity createDepartment() {
+            List<BranchEntity> results3 =   branchRepository.findAll();
+        return new DepartmentEntity(null , t_department.getText(), c_type.getValue().toString(), t_nip.getText(), t_country.getText(),
+                t_city.getText(), t_address.getText(), t_zip.getText(), t_email.getText(), t_telephone.getText(),
                 results3.stream().filter(e -> e.getName().equals(c_branch.getValue().toString())).findFirst().get()
         );
-        session2.getTransaction().commit();
-        return departmentEntity;
+    }
+    public void addBranch(ActionEvent event) {
+
+        try {
+            mainView.addBranch();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void save(ActionEvent event) {
+        if (!(t_department.getValidators().get(0).getHasErrors() ||
+                t_address.getValidators().get(0).getHasErrors()
+                || t_city.getValidators().get(0).getHasErrors()
+                || t_country.getValidators().get(0).getHasErrors()
+                || t_email.getValidators().get(0).getHasErrors()
+                || t_nip.getValidators().get(0).getHasErrors()
+                || t_telephone.getValidators().get(0).getHasErrors()
+                || t_zip.getValidators().get(0).getHasErrors()
+        ) ) {
 
-        SessionFactory sessionFactory2 = new Configuration().configure().buildSessionFactory();
-        Session session2 = sessionFactory2.openSession();
-        session2.beginTransaction();
-        try{
-            session2.save((createDepartment()));
-            session2.getTransaction().commit();
+
+            List<String> depList = new ArrayList<>();
+            List<DepartmentEntity> dep = departmentRepository.findAll();
+            depList.addAll(dep.stream().map(DepartmentEntity::getName).collect(Collectors.toList()));
+            mainView.getTableContractor().setItems(null);
+            contractorView.fillTableData();
+            ((Node) (event.getSource())).getScene().getWindow().hide();
+
         }
-        catch(ConstraintViolationException e) {
-            validator.validate(e);
-        }
-
-        mainView.getTableContractor().setItems(null);
-        contractorView.fillTableData();
-        ((Node)(event.getSource())).getScene().getWindow().hide();
-
     }
-    @FXML
-    Button b_save;
+
+    public void cancel(ActionEvent event) {
+        ((Node) (event.getSource())).getScene().getWindow().hide();
+    }
+
     @Autowired
-    ContractorView contractorView;
-    public void cancel(ActionEvent event){
-        ((Node)(event.getSource())).getScene().getWindow().hide();
-
-    }
-
-
-
-@Autowired
-MainView mainView;
-
-
+    BranchRepository branchRepository;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-            b_save.setGraphic(new ImageView("accept.png"));
 
-            SessionFactory sessionFactory2 = new Configuration().configure().buildSessionFactory();
-            Session session2 = sessionFactory2.openSession();
-            session2.beginTransaction();
+        StringValidator validator = new StringValidator();
+        validatorController.setStringValidator(validator, t_department, "Podaj prawidłową nazwę działu");
+
+        IntegerValidator validator2 = new IntegerValidator();
+        validatorController.setIntegerValidators(validator2, t_nip, "Podaj prawidłowy NIP");
+
+        StringValidator validator3 = new StringValidator();
+        validatorController.setStringValidator(validator3, t_country, "Podaj prawidłowy kraj");
+
+        StringValidator validator4 = new StringValidator();
+        validatorController.setStringValidator(validator4, t_city, "Podaj prawidłowe miasto");
+
+        EmailValidator validator5 = new EmailValidator();
+        validatorController.setEmailValidators(validator5, t_email, "Podaj prawidłowy adres email");
+
+        IntegerValidator validator6 = new IntegerValidator();
+        validatorController.setIntegerValidators(validator6, t_telephone, "Podaj prawidłowy telefon");
+
+        ZipValidator validator7 = new ZipValidator();
+        validatorController.setZipValidators(validator7, t_zip, "Podaj prawidłowy kod pocztowy");
+
+
             ObservableList<TypeOfNip> optionsModels =
                     FXCollections.observableArrayList(
                             TypeOfNip.values()
                     );
             c_type.setItems(optionsModels);
 
-
-            String sql3 = "SELECT * FROM BRANCH ";
-            SQLQuery query3 = session2.createSQLQuery(sql3);
-            query3.addEntity(BranchEntity.class);
-            List<BranchEntity> results3 = query3.list();
+             results3 =   branchRepository.findAll();
             List<String> texxtileList = results3.stream().map(BranchEntity::getName).collect(Collectors.toList());
             ObservableList<String> comboTextile =
                     FXCollections.observableArrayList(
                             texxtileList
                     );
             c_branch.setItems(comboTextile);
-            session2.getTransaction().commit();
-            session2.close();
-        c_branch.getSelectionModel().select(0);
-        c_type.getSelectionModel().select(0);
-
-
+            c_branch.getSelectionModel().select(0);
+            c_type.getSelectionModel().select(0);
     }
 
 

@@ -5,22 +5,22 @@
 <hibernate-configuration>
     <session-factory>
         <property name="hibernate.dialect">
-            cysewska.com.configuration.SQLiteDialect
+            org.hibernate.dialect.MySQLDialect
         </property>
         <property name="hibernate.connection.driver_class">
-            org.sqlite.JDBC
+            com.mysql.jdbc.Driver
         </property>
 
         <!-- Assume test is the database name -->
         <property name="hibernate.connection.url">
-            jdbc:sqlite:mydb.db
+            jdbc:mysql://localhost/test2
         </property>
         <property name="hibernate.connection.username">
-
+            root
         </property>
         <property name="hibernate.current_session_context_class">thread</property>
         <property name="hibernate.connection.password">
-
+            1234
         </property>
 
         <!-- List of XML mapping files -->

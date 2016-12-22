@@ -70,10 +70,10 @@ public class ContractorView  {
                     department.getTelephone())).collect(Collectors.toList()));
         }
 
-        contractorAction.getTableContractor().setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         ObservableList<ContractorDTO> data;
         data = FXCollections.observableArrayList(contractorDTOs);
         contractorAction.getTableContractor().setItems(data);
+        contractorAction.getTableContractor().setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
     }
 

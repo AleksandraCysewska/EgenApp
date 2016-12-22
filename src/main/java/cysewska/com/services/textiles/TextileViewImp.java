@@ -54,6 +54,5 @@ public class TextileViewImp {
         ObservableList<TextileDTO> data;
         data = FXCollections.observableArrayList(textileDTOs);
         mainView.getTableTextile().setItems(data);
-
     }
 }

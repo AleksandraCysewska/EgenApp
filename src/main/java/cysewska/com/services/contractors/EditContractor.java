@@ -1,11 +1,18 @@
 package cysewska.com.services.contractors;
 
+import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.validation.RequiredFieldValidator;
 import cysewska.com.controllers.MainView;
 import cysewska.com.models.entities.BranchEntity;
 import cysewska.com.models.entities.DepartmentEntity;
 import cysewska.com.models.enums.TypeOfNip;
-import cysewska.com.services.contractors.AddContractorWindow;
-import cysewska.com.services.validators.Validator;
+import cysewska.com.repositories.BranchRepository;
+import cysewska.com.repositories.DepartmentRepository;
+import cysewska.com.services.validators.ValidatorController;
+import cysewska.com.services.validators.services.EmailValidator;
+import cysewska.com.services.validators.services.IntegerValidator;
+import cysewska.com.services.validators.services.StringValidator;
+import cysewska.com.services.validators.services.ZipValidator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,24 +21,20 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import org.apache.log4j.Logger;
 import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -39,77 +42,105 @@ import java.util.stream.Collectors;
  */
 @Component
 public class EditContractor implements Initializable {
+    private final Logger logger = Logger.getLogger(this.getClass());
+
     @FXML
-    TextField t_department;
+    JFXTextField t_department;
     @FXML
     ComboBox c_branch;
     @FXML
     ComboBox c_type;
     @FXML
-    TextField t_nip;
+    JFXTextField t_nip;
     @FXML
-    TextField t_address;
+    JFXTextField t_address;
     @FXML
-    TextField t_zip;
+    JFXTextField t_zip;
     @FXML
-    TextField t_country;
+    JFXTextField t_country;
     @FXML
-    TextField t_email;
+    JFXTextField t_email;
     @FXML
-    TextField t_telephone;
+    JFXTextField t_telephone;
     @FXML
-    TextField t_city;
-    @FXML
-    Validator validator;
+    JFXTextField t_city;
+
+    @Autowired
+    MainView mainView;
+
+    DepartmentEntity departmentEntities = null;
+    List<BranchEntity> results3;
+    @Autowired
+    ContractorView contractorView;
+    AnchorPane root;
+    Stage stage;
+@Autowired
+ValidatorController validatorController;
+    @Autowired
+    DepartmentRepository departmentRepository;
+    @Autowired
+    BranchRepository branchRepository;
     public void cancel(ActionEvent event){
         ((Node)(event.getSource())).getScene().getWindow().hide();
     }
-    public void save(){
-        SessionFactory factory;
-        factory = new Configuration().configure().buildSessionFactory();
-        Session session = factory.openSession();
+    public void save(  ActionEvent event){
+
+
         DepartmentEntity departmentEntity = null;
-        Transaction tx = null;
-        try{
-            tx = session.beginTransaction();
-             departmentEntity = (DepartmentEntity)session.get(DepartmentEntity.class, departmentEntities.get(0).getId());
-            departmentEntity.setName(t_department.getText().toString());
-            departmentEntity.setNip(t_nip.getText().toString());
-            departmentEntity.setCountry(t_country.getText().toString());
-            departmentEntity.setCity(t_city.getText().toString());
-            departmentEntity.setAddress(t_address.getText().toString());
-            departmentEntity.setZip(t_zip.getText().toString());
-            departmentEntity.setEmail(t_email.getText().toString());
-            departmentEntity.setTelephone(t_telephone.getText().toString());
 
-            departmentEntity.setBranchEntity(results3.stream().filter(e->e.getName().equals(c_branch.getValue().toString())).findFirst().get());
-            departmentEntity.setTypeOfNip(c_type.getValue().toString());
-            session.update(departmentEntity);
-            tx.commit();
-            session.close();
+        List<DepartmentEntity> departmentList= departmentRepository.findAll();
+      /*  List<String> depList = departmentList.stream().
+                map(DepartmentEntity::getName).collect(Collectors.toList());
+*/
 
-        }catch (HibernateException e) {
-            if (tx != null) tx.rollback();
-        }
-        catch(ConstraintViolationException e) {
-            validator.validate(e);
-        }
+                departmentEntity = departmentRepository.findOne( departmentEntities.getId());
+                departmentEntity.setName(t_department.getText().toString());
+                departmentEntity.setNip(t_nip.getText().toString());
+                departmentEntity.setCountry(t_country.getText().toString());
+                departmentEntity.setCity(t_city.getText().toString());
+                departmentEntity.setAddress(t_address.getText().toString());
+                departmentEntity.setZip(t_zip.getText().toString());
+                departmentEntity.setEmail(t_email.getText().toString());
+                departmentEntity.setTelephone(t_telephone.getText().toString());
+
+                departmentEntity.setBranchEntity(results3.stream().filter(e -> e.getName().
+                        equals(c_branch.getValue().toString())).findFirst().get());
+                departmentEntity.setTypeOfNip(c_type.getValue().toString());
 
 
-        mainView.getTableContractor().setItems(null);
-        contractorView.fillTableData();
+         //       session.update(departmentEntity);
+
+
+                mainView.getTableContractor().setItems(null);
+                contractorView.fillTableData();
+                ((Node)(event.getSource())).getScene().getWindow().hide();
+
+
+
+
+
     }
-        @Autowired
-        ContractorView contractorView;
-    AnchorPane root;
-    Stage stage;
-    public void createView() throws IOException {
+    public void addBranch(ActionEvent event) {
+        try {
+            mainView.addBranch();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void createView()  {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/crud_contractor.fxml"));
         fxmlLoader.setController(this);
-        root = (AnchorPane)fxmlLoader.load();
+        try {
+            root = (AnchorPane)fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+            logger.error(e.getMessage());
+        }
         stage = new Stage();
         stage.setTitle("Edytowanie kontrahenta");
         stage.show();
+        stage.setResizable(false);
         stage.getIcons().add(new Image("shop.png"));
         fxmlLoader.setController(EditContractor.class);
         Scene scene = new Scene(root);
@@ -119,37 +150,45 @@ public class EditContractor implements Initializable {
         stage.centerOnScreen();
         stage.toFront();
     }
-@Autowired
-    MainView mainView;
-    List<DepartmentEntity> departmentEntities = null;
-    List<BranchEntity> results3;
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        SessionFactory sessionFactory2 = new Configuration().configure().buildSessionFactory();
-        Session session2 = sessionFactory2.openSession();
-        session2.beginTransaction();
 
-            String dep = "SELECT * FROM DEPARTMENT WHERE DEPARTMENT_NAME = :PARAM";
-            SQLQuery depQuery = session2.createSQLQuery(dep);
-            depQuery.setParameter("PARAM",mainView.getSelected() );
-            depQuery.addEntity(DepartmentEntity.class);
-            departmentEntities = depQuery.list();
+        departmentEntities = departmentRepository.findAll().stream().filter(e->e.getName().equals(mainView.getSelected())).findAny().get();
+
+        StringValidator validator = new StringValidator();
+        validatorController.setStringValidator(validator, t_department, "Podaj prawidłową nazwę działu");
+
+        IntegerValidator validator2 = new IntegerValidator();
+        validatorController.setIntegerValidators(validator2, t_nip, "Podaj prawidłowy NIP");
+
+        StringValidator validator3 = new StringValidator();
+        validatorController.setStringValidator(validator3, t_country, "Podaj prawidłowy kraj");
+
+        StringValidator validator4 = new StringValidator();
+        validatorController.setStringValidator(validator4, t_city, "Podaj prawidłowe miasto");
+
+        EmailValidator validator5 = new EmailValidator();
+        validatorController.setEmailValidators(validator5, t_email, "Podaj prawidłowy adres email");
+
+        IntegerValidator validator6 = new IntegerValidator();
+        validatorController.setIntegerValidators(validator6, t_telephone, "Podaj prawidłowy telefon");
+
+        ZipValidator validator7 = new ZipValidator();
+        validatorController.setZipValidators(validator7, t_zip, "Podaj prawidłowy kod pocztowy");
 
 
-
-
-
-
-            t_department.setText(departmentEntities.get(0).getName());
-            t_nip.setText(departmentEntities.get(0).getNip());
-            t_country.setText(departmentEntities.get(0).getCountry());
-            t_city.setText(departmentEntities.get(0).getCity());
-            t_address.setText(departmentEntities.get(0).getAddress());
-            t_zip.setText(departmentEntities.get(0).getZip());
-            t_email.setText(departmentEntities.get(0).getEmail());
-            t_telephone.setText(departmentEntities.get(0).getTelephone());
-            c_branch.getSelectionModel().select(departmentEntities.get(0).getBranchEntity().getName());
-            c_type.getSelectionModel().select(departmentEntities.get(0).getTypeOfNip());
+        t_department.setText(departmentEntities.getName());
+            t_nip.setText(departmentEntities.getNip());
+            t_country.setText(departmentEntities.getCountry());
+            t_city.setText(departmentEntities.getCity());
+            t_address.setText(departmentEntities.getAddress());
+            t_zip.setText(departmentEntities.getZip());
+            t_email.setText(departmentEntities.getEmail());
+            t_telephone.setText(departmentEntities.getTelephone());
+            c_branch.getSelectionModel().select(departmentEntities.getBranchEntity().getName());
+            c_type.getSelectionModel().select(departmentEntities.getTypeOfNip());
 
 
         ObservableList<TypeOfNip> optionsModels =
@@ -159,19 +198,15 @@ public class EditContractor implements Initializable {
         c_type.setItems(optionsModels);
 
 
-        String sql3 = "SELECT * FROM BRANCH ";
-        SQLQuery query3 = session2.createSQLQuery(sql3);
-
-        query3.addEntity(BranchEntity.class);
-       results3 = query3.list();
+       results3 = branchRepository.findAll();
         List<String> texxtileList = results3.stream().map(BranchEntity::getName).collect(Collectors.toList());
         ObservableList<String> comboTextile =
                 FXCollections.observableArrayList(
                         texxtileList
                 );
         c_branch.setItems(comboTextile);
-        session2.getTransaction().commit();
-        session2.close();
+        c_branch.getSelectionModel().selectFirst();
+        c_type.getSelectionModel().selectFirst();
 
 
     }

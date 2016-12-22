@@ -70,6 +70,9 @@ public class InfoInvoice implements Initializable {
         stage.toFront();
 
     }
+    public void addNewOrder() {
+
+    }
     public void cancel() {}
     public void save(ActionEvent event) {
         ((Node)(event.getSource())).getScene().getWindow().hide();

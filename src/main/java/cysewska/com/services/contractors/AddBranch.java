@@ -4,7 +4,6 @@ import cysewska.com.controllers.MainView;
 import cysewska.com.models.entities.BranchEntity;
 import cysewska.com.models.entities.DepartmentEntity;
 import cysewska.com.models.entities.ModelEntity;
-import cysewska.com.services.validators.Validator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,8 +22,11 @@ import org.springframework.stereotype.Component;
 
 import javax.validation.ConstraintViolationException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 /**
  * Created by Ola on 2016-10-26.
@@ -37,8 +39,7 @@ public class AddBranch {
     TextField t_name;
     AnchorPane root;
     Stage stage;
-    @Autowired
-    Validator validator;
+
     @Autowired
     ContractorView contractorView;
     public void showWindow() throws IOException {
@@ -51,6 +52,7 @@ public class AddBranch {
         stage.show();
         fxmlLoader.setController(AddBranch.class);
         Scene scene = new Scene(root);
+
         stage.setScene(scene);
         stage.setFullScreen(false);
         stage.show();
@@ -66,19 +68,29 @@ public class AddBranch {
         SQLQuery query3 = session2.createSQLQuery(sql3);
         query3.addEntity(BranchEntity.class);
         List<BranchEntity> results3 = query3.list();
-        BranchEntity branchEntity = new BranchEntity(
-                results3.stream().max(Comparator.comparing(BranchEntity::getId)).get().getId() + 1,
-                t_name.getText());
-        try{
-            session2.save((branchEntity));
-            session2.getTransaction().commit();
+        long id;
+        try {
+             id =  results3.stream().max(Comparator.comparing(BranchEntity::getId)).get().getId() + 1;
+        }catch(NoSuchElementException e) {
+            id=1;
         }
-        catch(ConstraintViolationException e) {
-            validator.validate(e);
-        }
-        mainView.getTableContractor().setItems(null);
-        contractorView.fillTableData();
-        ((Node)(event.getSource())).getScene().getWindow().hide();
+
+        List<String> uniques  = results3.stream().map(BranchEntity::getName).collect(Collectors.toList());
+
+
+            BranchEntity branchEntity = new BranchEntity(
+                    id,
+                    t_name.getText());
+
+                session2.save((branchEntity));
+                session2.getTransaction().commit();
+                mainView.getTableContractor().setItems(null);
+                contractorView.fillTableData();
+                ((Node)(event.getSource())).getScene().getWindow().hide();
+
+
+
+
 
     }
     public void cancel(ActionEvent event){

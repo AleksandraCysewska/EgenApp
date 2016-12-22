@@ -1,8 +1,11 @@
 package cysewska.com.models.entities;
 
 import cysewska.com.models.enums.Colors;
+import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 /**
@@ -15,8 +18,7 @@ import java.util.Set;
 @Table(name = "TEXTILE")
 public class TextileEntity {
     @Id
-  //  @GeneratedValue (strategy = GenerationType.IDENTITY, generator = "TEXTILE_SEQ")
-  //  @SequenceGenerator ( name = "TEXTILE_SEQ" , sequenceName = "TEXTILE_SEQ")
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column(name = "TEXTILE_ID")
     Long id;
     @Column(name = "TEXTILE_NAME")
@@ -24,11 +26,11 @@ public class TextileEntity {
     @Column(name = "TEXTILE_COLOR")
     String colors;
     @Column(name ="TEXTILE_QUANTITY" )
-    Integer textileQuantity;
+    Double textileQuantity;
     @Column(name ="TEXTILE_THICKNESS" )
-    Integer textileThickness;
+    Double textileThickness;
 
-    public TextileEntity(Long id, String name, String colors, Integer textileQuantity, Integer textileThickness) {
+    public TextileEntity(Long id, String name, String colors, Double textileQuantity, Double textileThickness) {
         this.id = id;
         this.name = name;
         this.colors = colors;
@@ -42,18 +44,6 @@ public class TextileEntity {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    @Override
-    public String toString() {
-        return "TextileEntity{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", colors=" + colors +
-                ", textileQuantity=" + textileQuantity +
-                ", textileThickness=" + textileThickness +
-
-                '}';
     }
 
     public String getName() {
@@ -72,22 +62,22 @@ public class TextileEntity {
         this.colors = colors;
     }
 
-    public Integer getTextileQuantity() {
+    public Double getTextileQuantity() {
         return textileQuantity;
     }
 
-    public void setTextileQuantity(Integer textileQuantity) {
+    public void setTextileQuantity(Double textileQuantity) {
         this.textileQuantity = textileQuantity;
     }
 
     public TextileEntity() {
     }
 
-    public Integer getTextileThickness() {
+    public Double getTextileThickness() {
         return textileThickness;
     }
 
-    public void setTextileThickness(Integer textileThickness) {
+    public void setTextileThickness(Double textileThickness) {
         this.textileThickness = textileThickness;
     }
 
@@ -101,4 +91,6 @@ public class TextileEntity {
 
     @OneToMany(mappedBy="textileEntity", fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     Set<Textile_Cloth_Entity> textile_cloths;
+
+
 }

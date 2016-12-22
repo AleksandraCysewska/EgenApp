@@ -1,47 +1,36 @@
 package cysewska.com.services.invoices;
 
 import com.itextpdf.text.DocumentException;
+import com.jfoenix.controls.JFXTextField;
 import cysewska.com.controllers.MainView;
 import cysewska.com.models.entities.InvoiceEntity;
-import cysewska.com.models.entities.ModelEntity;
 import cysewska.com.models.entities.OrderEntity;
 import cysewska.com.models.enums.ELanguage;
 import cysewska.com.models.enums.TypeOfPayment;
 import cysewska.com.repositories.InvoiceRepository;
 import cysewska.com.repositories.OrderRepository;
-import cysewska.com.services.contractors.AddContractorWindow;
+import cysewska.com.services.validators.services.IntegerValidator;
+import cysewska.com.services.validators.ValidatorController;
+import cysewska.com.services.validators.services.DoubleValidator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import org.hibernate.SQLQuery;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Date;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -49,16 +38,20 @@ import java.util.stream.Collectors;
  */
 @Component
 public class AddInvoice implements Initializable {
-
+@FXML
+Button save;
     private AnchorPane root;
     Stage stage;
-
+    @Autowired
+    InvoiceRepository invoiceRepository;
     @FXML
-    TextField t_netto;
+    Label addOrder;
     @FXML
-    TextField t_brutto;
+    JFXTextField t_netto;
     @FXML
-    TextField t_quantity;
+    JFXTextField t_brutto;
+    @FXML
+    JFXTextField t_quantity;
     @FXML
     DatePicker t_createDate;
     @FXML
@@ -71,26 +64,30 @@ public class AddInvoice implements Initializable {
     ComboBox c_payment;
     @Autowired
     CreateInvoices createInvoices;
-    public void save() throws IOException, DocumentException {
+    @Autowired
+    OrderRepository orderRepository;
+    @Autowired
+    MainView mainView;
+    @Autowired
+    ValidatorController validatorController;
+    @Autowired
+    InvoiceViewImp invoiceViewImp;
+    private final Logger logger = Logger.getLogger(this.getClass());
+
+    public void save(ActionEvent event) throws IOException, DocumentException {
+        List<InvoiceEntity> results = invoiceRepository.findAll();
+        List<OrderEntity> orderEntities = orderRepository.findAll();
+
+        long l ;
+        try{
+             l = results.stream().max(Comparator.comparing(InvoiceEntity::getId)).get().getId() + 1;
+        }catch(NoSuchElementException e){l=1;
+
+            logger.error(e.getMessage());
+        }
 
 
-        SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-
-        String sql = "SELECT * FROM INVOICE ";
-        SQLQuery query = session.createSQLQuery(sql);
-        query.addEntity(InvoiceEntity.class);
-        List<InvoiceEntity> results = query.list();
-
-        String sqlOrder = "SELECT * FROM ORDERS ";
-        SQLQuery queryOrder = session.createSQLQuery(sqlOrder);
-        queryOrder.addEntity(OrderEntity.class);
-        List<OrderEntity> orderEntities = queryOrder.list();
-
-        long l = results.stream().max(Comparator.comparing(InvoiceEntity::getId)).get().getId() + 1;
-
-        session.save(new InvoiceEntity(
+        invoiceRepository.save(new InvoiceEntity(
                 l,
                 "INVOICE " + l + " " + c_language.getValue().toString(),
                 c_language.getValue().toString(),
@@ -103,28 +100,37 @@ public class AddInvoice implements Initializable {
                 orderEntities.stream().filter(e -> e.getName().equals(c_order.getValue().toString())).findAny().get()
 
         ));
-        session.getTransaction().commit();
-        session.close();
 
-        mainView.getTableInvoice().setItems(null);
+
+       mainView.getTableInvoice().setItems(null);
         invoiceViewImp.fillTableData();
         createInvoices.createInvoice();
+        ((Node) (event.getSource())).getScene().getWindow().hide();
 
 
     }
-    @Autowired
-    MainView mainView;
-    @Autowired
-    InvoiceViewImp invoiceViewImp;
-    public void cancel() {
+
+    public void cancel(ActionEvent event) {
+        ((Node) (event.getSource())).getScene().getWindow().hide();
 
     }
-
-    public void showWindow() throws IOException {
+    public void addNewOrder(ActionEvent event) {
+        try {
+            mainView.addOrder(event);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void showWindow() {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/add_invoice.fxml"));
             fxmlLoader.setController(this);
+        try {
             root = (AnchorPane)fxmlLoader.load();
-            stage = new Stage();
+        } catch (IOException e) {
+            e.printStackTrace();
+            logger.error(e.getMessage());
+        }
+        stage = new Stage();
             stage.setTitle("Dodawanie faktury");
             stage.show();
         stage.getIcons().add(new Image("shop.png"));
@@ -132,14 +138,28 @@ public class AddInvoice implements Initializable {
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.setFullScreen(false);
+        stage.setResizable(false);
             stage.show();
             stage.centerOnScreen();
             stage.toFront();
 
     }
 
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        DoubleValidator validator = new DoubleValidator();
+        validatorController.setValidatorsIfContainLetter(validator, t_brutto, "Podaj nazwę tkaniny");
+
+        DoubleValidator validator2 = new DoubleValidator();
+        validatorController.setValidatorsIfContainLetter(validator2, t_netto, "Podaj nazwę tkaniny");
+
+        IntegerValidator validator3 = new IntegerValidator();
+        validatorController.setIntegerValidators(validator3, t_quantity, "Podaj nazwę tkaniny");
+
+
+        addOrder.setVisible(false);
         ObservableList<ELanguage> languageList =
                 FXCollections.observableArrayList(
                         ELanguage.values()
@@ -152,29 +172,25 @@ public class AddInvoice implements Initializable {
                 );
         c_payment.setItems(typeOfPayments);
 
-        SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
+        List<OrderEntity> results = orderRepository.findAll();
 
-        String sql = "SELECT * FROM ORDERS ";
-        SQLQuery query = session.createSQLQuery(sql);
-        query.addEntity(OrderEntity.class);
-        List<OrderEntity> results = query.list();
 
-        List<String> ordersList = new ArrayList<>();
-        for (OrderEntity result : results) {
-            ordersList.add(result.getName());
-        }
+        List<String> ordersList = results.stream().map(OrderEntity::getName).collect(Collectors.toList());
         ObservableList<String> orderEntities =
                 FXCollections.observableArrayList(
                         ordersList
                 );
         c_order.setItems(orderEntities);
 
-        session.getTransaction().commit();
-        session.close();
-        t_term.setPrefWidth(212);
-        t_createDate.setPrefWidth(212);
+        if(orderEntities.size()==0){
+            addOrder.setVisible(true);
+            c_order.setVisible(false);
+            save.setDisable(true);
+        }
+        c_order.getSelectionModel().selectFirst();
+        c_language.getSelectionModel().selectFirst();
+        c_payment.getSelectionModel().selectFirst();
+
     }
 
 }

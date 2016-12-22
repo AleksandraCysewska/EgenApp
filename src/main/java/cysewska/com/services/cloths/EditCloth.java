@@ -55,7 +55,7 @@ public class EditCloth implements Initializable {
     TableColumn col_name, col_quantity;
 
     public void add() {
-        textileClothDTOs.add(new TextileClothDTO(c_textile.getValue().toString(), Integer.parseInt(t_quantity.getText().toString())));
+        textileClothDTOs.add(new TextileClothDTO(c_textile.getValue().toString(), Double.parseDouble(t_quantity.getText().toString())));
         for (int i = 0; i < listViewitems.size(); i++) {
             listViewitems.remove(i);
         }

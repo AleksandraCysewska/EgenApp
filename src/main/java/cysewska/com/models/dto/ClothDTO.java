@@ -1,6 +1,5 @@
 package cysewska.com.models.dto;
 
-import cysewska.com.models.enums.Model;
 
 /**
  * Created by cysewskaa on 2016-09-07.

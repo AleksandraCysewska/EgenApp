@@ -8,8 +8,8 @@ import cysewska.com.models.enums.Colors;
 public class TextileDTO {
     String name;
     String colors;
-    Integer textileQuantity;
-    Integer textileThickness;
+    Double textileQuantity;
+    Double textileThickness;
 
     public String getName() {
         return name;
@@ -27,23 +27,23 @@ public class TextileDTO {
         this.colors = colors;
     }
 
-    public Integer getTextileQuantity() {
+    public Double getTextileQuantity() {
         return textileQuantity;
     }
 
-    public void setTextileQuantity(Integer textileQuantity) {
+    public void setTextileQuantity(Double textileQuantity) {
         this.textileQuantity = textileQuantity;
     }
 
-    public Integer getTextileThickness() {
+    public Double getTextileThickness() {
         return textileThickness;
     }
 
-    public void setTextileThickness(Integer textileThickness) {
+    public void setTextileThickness(Double textileThickness) {
         this.textileThickness = textileThickness;
     }
 
-    public TextileDTO(String name, String colors, Integer textileQuantity, Integer textileThickness) {
+    public TextileDTO(String name, String colors, Double textileQuantity, Double textileThickness) {
 
         this.name = name;
         this.colors = colors;

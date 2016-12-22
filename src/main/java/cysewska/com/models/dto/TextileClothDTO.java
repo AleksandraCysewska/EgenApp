@@ -14,19 +14,19 @@ public class TextileClothDTO {
         this.name = name;
     }
 
-    public Integer getQuantity() {
+    public Double getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Integer quantity) {
+    public void setQuantity(Double quantity) {
         this.quantity = quantity;
     }
 
-    public TextileClothDTO(String name, Integer quantity) {
+    public TextileClothDTO(String name, Double quantity) {
 
         this.name = name;
         this.quantity = quantity;
     }
 
-    Integer quantity;
+    Double quantity;
 }

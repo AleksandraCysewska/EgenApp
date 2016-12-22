@@ -33,12 +33,10 @@ import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaUpdate;
 import javax.persistence.criteria.Root;
+import javax.validation.ConstraintViolationException;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -82,7 +80,7 @@ public class AddCloth implements Initializable {
 
     public void add() {
 
-        textileClothDTOs.add(new TextileClothDTO(c_textile.getValue().toString(), Integer.parseInt(t_quantity.getText().toString())));
+        textileClothDTOs.add(new TextileClothDTO(c_textile.getValue().toString(),  Double.parseDouble(t_quantity.getText().toString())));
         for (int i = 0; i < listViewitems.size(); i++) {
             listViewitems.remove(i);
         }
@@ -180,7 +178,14 @@ public class AddCloth implements Initializable {
                     SQLQuery query2 = session.createSQLQuery(sql2);
                     query2.addEntity(ClothEntity.class);
                     List<ClothEntity> clothList = query2.list();
-                    long l = clothList.stream().max(Comparator.comparing(ClothEntity::getId)).get().getId() + 1;
+            long l;
+            try{
+                 l = clothList.stream().max(Comparator.comparing(ClothEntity::getId)).get().getId() + 1;
+
+            }catch(NoSuchElementException e)
+            {
+                l=1;
+            }
 
                     ClothEntity clothEntity = new ClothEntity(
                             l,
@@ -195,22 +200,39 @@ public class AddCloth implements Initializable {
 
                     SQLQuery findID = session.createSQLQuery("SELECT * FROM TEXTILE_CLOTH");
                     findID.addEntity(Textile_Cloth_Entity.class);
-                    List<Textile_Cloth_Entity> textileCloth = findID.list();
-                    long textileClothID = textileCloth.stream().max(Comparator.comparing(Textile_Cloth_Entity::getId)).get().getId() + 1;
+
+            List<Textile_Cloth_Entity> textileCloth = findID.list();
+            long textileClothID;
+            try{
+                 textileClothID = textileCloth.stream().max(Comparator.comparing(Textile_Cloth_Entity::getId)).get().getId() + 1;
+
+            }catch (NoSuchElementException e){
+                textileClothID=1;
+            }
 
 
                     //textile
                     SQLQuery findTextile = session.createSQLQuery("SELECT * FROM TEXTILE");
                     findTextile.addEntity(TextileEntity.class);
                     List<TextileEntity> textiles = findTextile.list();
+                    int temp=0;
                     for (TextileClothDTO listViewitem : listViewitems) {
-                        session.save(new Textile_Cloth_Entity(
-                                textileClothID,
+
+
+
+
+
+
+                       session.save(new Textile_Cloth_Entity(
+                                textileClothID + temp,
                                 listViewitem.getQuantity(),
                                 clothEntity,
                                 textiles.stream().filter(e -> e.getName().equals(listViewitem.getName().toString())).findAny().get()
                         ));
-                    }
+                        temp++;}
+
+
+
                     session.getTransaction().commit();
 
                 }

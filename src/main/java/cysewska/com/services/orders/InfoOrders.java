@@ -100,6 +100,10 @@ AnchorPane root;
     Button save, cancel;
 @FXML
 GridPane mainGrid;
+    public void cancel(ActionEvent event){
+        ((Node) (event.getSource())).getScene().getWindow().hide();
+
+    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         SessionFactory sessionFactory2 = new Configuration().configure().buildSessionFactory();

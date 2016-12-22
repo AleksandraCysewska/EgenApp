@@ -1,6 +1,7 @@
 package cysewska.com.models.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.Set;
 
@@ -13,16 +14,21 @@ import java.util.Set;
 @Table(name = "ORDERS")
 public class OrderEntity {
     @Id
-   // @GeneratedValue(strategy = GenerationType.TABLE)
+  @GeneratedValue(strategy = GenerationType.TABLE)
     @Column(name = "ORDER_ID")
     Long id;
     @Column(name = "ORDER_NAME")
     String name;
     @Column(name = "NOTE")
+    @Size(min =1, message = "Pole z datą realizacji zamówienia nie może być puste. ")
+
     String note;
+    @Size(min =1, message = "Pole z datą utworzenia zamówienia nie może być puste. ")
     @Column( name = "DATE_OF_SUBMIT")
     String dateOfSubmit;
     @Column(name = "DATE_OF_EXECUTION")
+    @Size(min =1, message = "Pole z datą realizacji zamówienia nie może być puste. ")
+
     String dateOfExecution;
 
 

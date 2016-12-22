@@ -15,6 +15,8 @@ import java.util.Set;
 @Table(name = "BRANCH")
 public class BranchEntity {
     @Id
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
+
     @Column(name = "BRANCH_ID")
     Long id;
     @Column(name = "BRANCH_NAME", unique = true)

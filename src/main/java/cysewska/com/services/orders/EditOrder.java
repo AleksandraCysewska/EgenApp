@@ -8,9 +8,11 @@ import cysewska.com.models.entities.*;
 import cysewska.com.services.contractors.AddContractorWindow;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -246,5 +248,9 @@ public class EditOrder implements Initializable {
         }
         session2.getTransaction().commit();
         session2.close();
+    }
+    public void cancel(ActionEvent event){
+        ((Node) (event.getSource())).getScene().getWindow().hide();
+
     }
 }

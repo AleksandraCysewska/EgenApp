@@ -4,7 +4,6 @@ import cysewska.com.controllers.MainView;
 import cysewska.com.models.entities.BranchEntity;
 import cysewska.com.models.entities.DepartmentEntity;
 import cysewska.com.models.entities.ModelEntity;
-import cysewska.com.services.validators.Validator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -42,8 +41,7 @@ public class EditBranch implements Initializable{
     ContractorView contractorView;
     @FXML
     TextField t_name;
-    @Autowired
-    Validator validator;
+
     public void showWindow() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/model_branch.fxml"));
         fxmlLoader.setController(this);
@@ -84,9 +82,7 @@ public class EditBranch implements Initializable{
         }catch (HibernateException e) {
             if (tx != null) tx.rollback();
         }
-        catch(ConstraintViolationException e) {
-           validator.validate(e);
-        }
+
         mainView.getTableContractor().setItems(null);
         contractorView.fillTableData();
         ((Node)(event.getSource())).getScene().getWindow().hide();

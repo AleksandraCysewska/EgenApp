@@ -6,11 +6,11 @@
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
 
-<SplitPane fx:id="okienko" dividerPositions="0.07035175879396985" maxWidth="600.0" orientation="VERTICAL" prefHeight="400.0" prefWidth="-1.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="cysewska.com.controllers.MainView">
+<SplitPane fx:id="okienko" dividerPositions="0.07035175879396985" stylesheets="@bootstrap.css" maxWidth="600.0" orientation="VERTICAL" prefHeight="400.0" prefWidth="-1.0" style=".split-pane *.vertical-grabber {&#10;    -fx-padding: 0;&#10;    -fx-background-color: transparent;&#10;    -fx-background-insets: 0;&#10;    -fx-shape: &quot; &quot;;&#10;}" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="cysewska.com.controllers.MainView">
   <items>
     <AnchorPane maxHeight="25.0" minHeight="25.0" minWidth="0.0" prefHeight="25.0" prefWidth="598.0">
       <children>
-        <MenuBar prefHeight="37.0" prefWidth="598.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <MenuBar  fx:id="menu" prefHeight="37.0" prefWidth="598.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
           <menus>
             <Menu mnemonicParsing="false" text="Plik" fx:id="m_file">
               <items>

@@ -41,6 +41,8 @@ public class StartApp extends Application {
         primaryStage.setResizable(true);
         primaryStage.setTitle("Aplikacja EGEN");
         primaryStage.show();
+        setUserAgentStylesheet(STYLESHEET_MODENA);
+        primaryStage.toBack();
     }
 
     public static void main(String[] args) {

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@bootstrap.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+  <children>
+    <SplitPane fx:id="split" dividerPositions="0.5100502512562815" focusTraversable="true" orientation="VERTICAL" prefHeight="400.0" prefWidth="600.0" style="-fx-box-border: transparent" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="0.0">
+      <items>
+        <AnchorPane maxHeight="200.0" minHeight="200.0" minWidth="0.0" prefHeight="200.0" prefWidth="598.0">
+          <children>
+            <GridPane prefHeight="200.0" prefWidth="598.0" style="-fx-background-color: #;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <children>
+                <Label alignment="CENTER" text="Witaj w aplikacji &quot;Egen&quot;" textAlignment="CENTER" textOverrun="CLIP" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER">
+                  <font>
+                    <Font size="36.0" />
+                  </font>
+                </Label>
+              </children>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+          </children>
+        </AnchorPane>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+          <children>
+            <GridPane alignment="CENTER_LEFT" blendMode="MULTIPLY" prefHeight="192.0" prefWidth="598.0" style="" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <children>
+                <Label text="Login" translateX="-50.0" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
+                <Label text="Hasło" translateX="-50.0" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                <TextField fx:id="login" prefWidth="200.0" promptText="Login" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                <PasswordField fx:id="password" prefWidth="200.0" promptText="Hasło" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#login" prefHeight="32.0" prefWidth="131.0" styleClass="success" text="Zaloguj" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+              </children>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="349.0" minWidth="10.0" prefWidth="228.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="395.0" minWidth="10.0" prefWidth="240.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="395.0" minWidth="10.0" prefWidth="130.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+          </children>
+        </AnchorPane>
+      </items>
+    </SplitPane>
+  </children>
+</AnchorPane>

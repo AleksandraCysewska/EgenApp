@@ -83,10 +83,12 @@ public class EditInvoice implements Initializable {
             tx.commit();
             session.close();
         }
-        mainView.getTableInvoice().setItems(null);
+      //  mainView.getTableInvoice().setItems(null);
         invoiceViewImp.fillTableData();
     }
+    public void addNewOrder() {
 
+    }
     @Autowired
     InvoiceViewImp invoiceViewImp;
 

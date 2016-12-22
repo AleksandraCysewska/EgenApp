@@ -6,6 +6,7 @@ package cysewska.com.models.entities;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 
@@ -13,10 +14,12 @@ import java.util.Set;
 @Table(name = "MODELS")
 public class ModelEntity {
     @Id
-  //  @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
+
     @Column(name = "MODEL_ID")
     Long id;
-    @Column(name = "MODEL_NAME")
+    @Size(min = 2, message = "Nazwa musi być unikalna i zawierać minimum jeden znak.")
+    @Column(name = "MODEL_NAME", unique = true)
     String model;
 
     public ModelEntity(Long id, String model) {

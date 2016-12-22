@@ -13,6 +13,9 @@ import java.util.Set;
 @Table(name = "CLOTH")
 public class ClothEntity {
     @Id
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
+
+
     @Column(name = "CLOTH_ID")
     Long id;
     @Column(name = "CLOTH_NAME_PL", unique = true)
@@ -123,20 +126,7 @@ public class ClothEntity {
         this.textile_cloths = textile_cloths;
     }
 
-    @Override
-    public String toString() {
-        return "ClothEntity{" +
-                "id=" + id +
-                ", clothNamePL='" + clothNamePL + '\'' +
-                ", clothNameNO='" + clothNameNO + '\'' +
-                ", clothNameENG='" + clothNameENG + '\'' +
-                ", clothImage=" + Arrays.toString(clothImage) +
-                ", priceEuro=" + priceEuro +
-                ", pricePl=" + pricePl +
-                ", modelEntity=" + modelEntity +
-                ", textile_cloths=" + textile_cloths +
-                '}';
-    }
+
 
   /*  @ManyToMany(targetEntity=cysewska.com.models.entities.OrderEntity.class)
     Set<OrderEntity> orderEntity;

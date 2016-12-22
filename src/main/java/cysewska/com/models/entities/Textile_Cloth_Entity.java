@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Table(name = "TEXTILE_CLOTH")
 public class Textile_Cloth_Entity {
     @Id
-   // @GeneratedValue(strategy = GenerationType.TABLE)
+   @GeneratedValue(strategy = GenerationType.TABLE)
     @Column(name = "TEXTILE_CLOTH_ID")
     Long id;
 
@@ -18,7 +18,7 @@ public class Textile_Cloth_Entity {
 
     }
 
-    public Textile_Cloth_Entity(Long id, Integer textileClothQuantities, ClothEntity clothEntity, TextileEntity textileEntity) {
+    public Textile_Cloth_Entity(Long id, Double textileClothQuantities, ClothEntity clothEntity, TextileEntity textileEntity) {
 
         this.id = id;
         this.textileClothQuantities = textileClothQuantities;
@@ -27,20 +27,11 @@ public class Textile_Cloth_Entity {
     }
 
     @Column(name = "TEXTILE_CLOTH_QUANTITIES")
-    Integer textileClothQuantities;
+    Double textileClothQuantities;
 
     @ManyToOne
     @JoinColumn(name="CLOTH_ID")
     ClothEntity clothEntity;
-
-    @Override
-    public String toString() {
-        return "Textile_Cloth_Entity{" +
-                "id=" + id +
-                ", textileClothQuantities=" + textileClothQuantities +
-
-                '}';
-    }
 
     public Long getId() {
         return id;
@@ -50,11 +41,11 @@ public class Textile_Cloth_Entity {
         this.id = id;
     }
 
-    public Integer getTextileClothQuantities() {
+    public Double getTextileClothQuantities() {
         return textileClothQuantities;
     }
 
-    public void setTextileClothQuantities(Integer textileClothQuantities) {
+    public void setTextileClothQuantities(Double textileClothQuantities) {
         this.textileClothQuantities = textileClothQuantities;
     }
 
@@ -77,4 +68,14 @@ public class Textile_Cloth_Entity {
     @ManyToOne
     @JoinColumn(name="TEXTILE_ID")
     TextileEntity textileEntity;
+
+    @Override
+    public String toString() {
+        return "Textile_Cloth_Entity{" +
+                "id=" + id +
+                ", textileClothQuantities=" + textileClothQuantities +
+                ", clothEntity=" + clothEntity +
+                ", textileEntity=" + textileEntity +
+                '}';
+    }
 }

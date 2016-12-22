@@ -25,12 +25,14 @@ import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -87,6 +89,9 @@ public class AddOrder implements Initializable {
     }
 
 Stage stage;
+    public void cancel(){
+
+    }
     public void createView() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/add_order.fxml"));
         fxmlLoader.setController(this);
@@ -98,7 +103,8 @@ Stage stage;
         fxmlLoader.setController(AddOrder.class);
         Scene scene = new Scene(root);
         stage.setScene(scene);
-        stage.setFullScreen(false);
+
+        stage.setMaximized(true);
         stage.show();
         stage.centerOnScreen();
         stage.toFront();
@@ -120,17 +126,32 @@ Stage stage;
         SQLQuery queryDep = session.createSQLQuery(sqlDep);
         queryDep.addEntity(DepartmentEntity.class);
         List<DepartmentEntity> departmentEntities = queryDep.list();
-        long l = results.stream().max(Comparator.comparing(OrderEntity::getId)).get().getId() + 1;
+        long l ;
+try{
+    l = results.stream().max(Comparator.comparing(OrderEntity::getId)).get().getId() + 1;
+}catch(NoSuchElementException e){
+    l=1;
+}
+        OrderEntity order = null;
 
-        OrderEntity order =    new OrderEntity(
-                l,
-                "ORDER " + l,
-                t_description.getText(),
-                t_create.getValue().toString(),
-                t_do.getValue().toString(),
-                departmentEntities.stream().filter(e->e.getName().equals(c_department.getValue().toString())).findAny().get()
-        );
-        session.save(order);
+
+
+
+
+
+             order =    new OrderEntity(
+                    l,
+                    "ORDER " + l,
+                    t_description.getText(),
+
+                    t_create.getValue().toString(),
+                    t_do.getValue().toString(),
+                    departmentEntities.stream().filter(e->e.getName().equals(c_department.getValue().toString())).findAny().get()
+            );
+            session.save(order);
+
+      
+
 
 
 
@@ -142,10 +163,18 @@ Stage stage;
         SQLQuery findTextile = session.createSQLQuery("SELECT * FROM CLOTH");
         findTextile.addEntity(ClothEntity.class);
         List<ClothEntity> textiles = findTextile.list();
-int licznik =0;
+        int licznik =0;
         for (ClothOrderDTO listViewitem : listViewitems) {
+            long p;
+            try{
+            p=  textile_cloth_entities.stream().max(Comparator.comparing(OrderClothEntity::getId)).get().getId() + 1 + licznik;
+            }
+            catch(NoSuchElementException e)
+            {
+                p=1;
+            }
             session.save(new OrderClothEntity(
-                    textile_cloth_entities.stream().max(Comparator.comparing(OrderClothEntity::getId)).get().getId() + 1 + licznik,
+               p,
                     Long.valueOf(listViewitem.getQuantity().toString()),
                     order,
                     textiles.stream().filter(e -> e.getClothNamePL().equals(listViewitem.getName().toString())).findAny().get()

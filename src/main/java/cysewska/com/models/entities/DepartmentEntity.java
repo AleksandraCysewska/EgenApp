@@ -17,34 +17,26 @@ import java.util.Set;
 @Table(name = "DEPARTMENT")
 public class DepartmentEntity {
     @Id
-    @NonNull
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column(name = "DEPARTMENT_ID")
     Integer id;
-    @Column(name = "DEPARTMENT_NAME", unique = true)
+    @Column(name = "DEPARTMENT_NAME")
     @NonNull
-    @Size(min=1, message = "Nazwa musi być unikalna i zawierać minimum jeden znak.")
     String name;
     @Column(name = "TYPE_OF_NIP")
     String typeOfNip;
-    @Pattern(regexp = "^[0-9]{1,45}", message = "NIP musi zawierać same cyfry do maksymalnej długości 45 znaków.")
-    @Column(name = "NIP", unique = true)
+    @Column(name = "NIP")
     String nip;
     @Column(name = "COUNTRY")
-    @Pattern(regexp = ".{3,45}", message = "Kraj musi zawierać co najmniej trzy znaki.")
     String country;
-    @Size(min=2, message="Miasto musi zawierać co najmniej dwa znaki.")
     @Column(name = "CITY")
     String city;
     @Column(name = "ADDRESS")
-    @Size(min=2, message="Adres musi zawierać co najmniej dwa znaki.")
     String address;
     @Column(name = "ZIP")
-    @Pattern(regexp = "[0-9]{2}-[0-9]{3}", message = "Kod pocztowy musi mieć postać **-***, zawierający same cyfry/")
     String zip;
-    @Email(message = "Email musi być prawidłowy.")
     @Column(name = "EMAIL")
     String email;
-    @Pattern(regexp = "^[0-9]{3,45}", message = "Telefon musi zawierać co najmniej trzy cyfry.")
     @Column(name = "TELEPHONE")
     String telephone;
 
@@ -52,11 +44,9 @@ public class DepartmentEntity {
     @JoinColumn(name="BRANCH_ID")
     BranchEntity branchEntity;
 
-
     @OneToMany(mappedBy="departmentEntity", fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     Set<OrderEntity> orders;
-    public DepartmentEntity()
-    {}
+    public DepartmentEntity() {}
     public DepartmentEntity(Integer id, String name, String typeOfNip, String nip, String country, String city, String address, String zip, String email, String telephone, BranchEntity branchEntity) {
         this.id = id;
         this.name = name;

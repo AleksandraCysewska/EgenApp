@@ -1,27 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.collections.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
+<?import com.jfoenix.controls.JFXTextField?>
 
-<AnchorPane id="AnchorPane" fx:id="contractor_window" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="449.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+<AnchorPane id="AnchorPane" fx:id="contractor_window" maxHeight="658.0" maxWidth="603.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="658.0" prefWidth="603.0" stylesheets="@bootstrap.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
   <children>
     <GridPane prefHeight="449.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <children>
-        <Label prefWidth="120.0" text="Filia" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
-        <Label prefWidth="120.0" text="Oddział" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
-        <Label prefWidth="120.0" text="Typ NIPu" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
-        <Label prefWidth="120.0" text="NIP" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
-        <Label prefWidth="120.0" text="Kraj" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
-        <Label prefWidth="120.0" text="Miasto" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="6" />
-        <Label prefWidth="120.0" text="Adres" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="7" />
-        <Label prefWidth="120.0" text="Kod pocztowy" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="8" />
-        <Label prefWidth="120.0" text="Email" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="9" />
-        <Label prefWidth="120.0" text="Telefon" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="10" />
-        <ComboBox fx:id="c_branch" prefHeight="21.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+        <Label prefWidth="120.0" text="Filia" GridPane.columnIndex="0" GridPane.halignment="RIGHT" />
+        <Label prefWidth="120.0" text="Oddział" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+        <Label prefWidth="120.0" text="Typ NIPu" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+        <Label prefWidth="120.0" text="NIP" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+        <Label prefWidth="120.0" text="Kraj" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
+        <Label prefWidth="120.0" text="Miasto" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
+        <Label prefWidth="120.0" text="Adres" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="6" />
+        <Label prefWidth="120.0" text="Kod pocztowy" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="7" />
+        <Label prefWidth="120.0" text="Email" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="8" />
+        <Label prefWidth="120.0" text="Telefon" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="9" />
+        <ComboBox fx:id="c_branch" prefHeight="21.0" prefWidth="200.0" promptText="Filia" GridPane.columnIndex="1" GridPane.halignment="CENTER">
           <items>
             <FXCollections fx:factory="observableArrayList">
               <String fx:value="Item 1" />
@@ -30,7 +32,7 @@
             </FXCollections>
           </items>
         </ComboBox>
-        <ComboBox fx:id="c_type" prefHeight="21.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+        <ComboBox fx:id="c_type" prefHeight="21.0" prefWidth="200.0" promptText="Typ NiPu" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
           <items>
             <FXCollections fx:factory="observableArrayList">
               <String fx:value="Item 1" />
@@ -39,25 +41,24 @@
             </FXCollections>
           </items>
         </ComboBox>
-        <TextField fx:id="t_department" maxWidth="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-        <TextField fx:id="t_nip" maxWidth="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
-        <TextField fx:id="t_country" maxWidth="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
-        <TextField fx:id="t_city" maxWidth="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
-        <TextField fx:id="t_address" maxWidth="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
-        <TextField fx:id="t_zip" maxWidth="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
-        <TextField fx:id="t_email" maxWidth="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="9" />
-        <TextField fx:id="t_telephone" maxWidth="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="10" />
-        <Button fx:id="b_save" mnemonicParsing="false" onAction="#save" prefHeight="25.0" prefWidth="120.0" text="Zapisz" translateX="-50.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="12" />
-        <Button mnemonicParsing="false" onAction="#cancel" prefHeight="25.0" prefWidth="120.0" text="Anuluj" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="12" />
+        <JFXTextField fx:id="t_department" focusColor="#fafafa0e" maxWidth="200.0" prefWidth="200.0" promptText="Odział" unFocusColor="#ede8e806" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+        <JFXTextField fx:id="t_nip" focusColor="#f5f5f700" maxWidth="200.0" prefWidth="200.0" promptText="NIP" unFocusColor="#f5f2f200" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+        <JFXTextField fx:id="t_country" focusColor="#f7f7f700" maxWidth="200.0" prefWidth="200.0" promptText="Kraj" unFocusColor="#fafafa01" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+        <JFXTextField fx:id="t_city" focusColor="#e9eaf000" maxWidth="200.0" prefWidth="200.0" promptText="Miasto" unFocusColor="#f0f0f000" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+        <JFXTextField fx:id="t_address" focusColor="#f5f6fa00" maxWidth="200.0" prefWidth="200.0" promptText="Adres" unFocusColor="#edebeb0c" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
+        <JFXTextField fx:id="t_zip" focusColor="#f0f0f000" maxWidth="200.0" prefWidth="200.0" promptText="Kod pocztowy" unFocusColor="#e5e5e511" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
+        <JFXTextField fx:id="t_email" focusColor="#f5f5f700" maxWidth="200.0" prefWidth="200.0" promptText="Email" unFocusColor="#ebebeb00" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
+        <JFXTextField fx:id="t_telephone" focusColor="#e8eaed00" maxWidth="200.0" prefWidth="200.0" promptText="Telefon" unFocusColor="#f7f2f200" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="9" />
+        <Button fx:id="b_save" mnemonicParsing="false" onAction="#save" prefHeight="25.0" prefWidth="120.0" styleClass="success" text="Zapisz" translateX="-50.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="11" />
+        <Button mnemonicParsing="false" onAction="#cancel" prefHeight="25.0" prefWidth="120.0" styleClass="danger" text="Anuluj" GridPane.halignment="RIGHT" GridPane.rowIndex="11" />
+            <Button mnemonicParsing="false" onAction="#addBranch" styleClass="primary" text="+" GridPane.columnIndex="2" />
       </children>
       <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="10.0" prefWidth="200.0" />
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="306.0" minWidth="10.0" prefWidth="306.0" />
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="193.0" minWidth="10.0" prefWidth="94.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="254.0" minWidth="10.0" prefWidth="234.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="306.0" minWidth="10.0" prefWidth="272.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="193.0" minWidth="10.0" prefWidth="97.0" />
       </columnConstraints>
       <rowConstraints>
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
